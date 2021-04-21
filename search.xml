@@ -1,121 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>video和audio详解</title>
-    <url>/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持Video标签。</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>video</code>:定义一个视频</li>
-<li><code>source</code>:定义多种媒体资源，如video，audio</li>
-<li>只支持: .mp4后缀(.h264编码格式),和.webm后缀(专用web视频格式),以及.ogg后缀(音频文件)</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>Html5 Video 可以添加多个source源来进行兼容适配,这样,当第一个源读取出问题时会自动读取下一个源.<br>比如可以同时在前面加上.webm和.mp4源,这样一个出错时会自动读取另一个可用源(因为不同浏览器,支持的格式是不一样的)</li>
-</ul>
-<h3 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h3><p><img src="https://images2015.cnblogs.com/blog/406799/201606/406799-20160601115737352-1458849421.png" alt="浏览器兼容"></p>
-<h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
-<li><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>如果出现该属性，则视频在就绪后马上播放。</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
-</tr>
-<tr>
-<td>height</td>
-<td>px</td>
-<td>设置视频播放器的高度。</td>
-</tr>
-<tr>
-<td>width</td>
-<td>px</td>
-<td>设置视频的宽度</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
-</tr>
-<tr>
-<td>muted</td>
-<td>muted</td>
-<td>规定视频的音频输出应该被静音。</td>
-</tr>
-<tr>
-<td>poster</td>
-<td>URL</td>
-<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>preload</td>
-<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放的视频的 URL。</td>
-</tr>
-</tbody></table>
-<h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>如果出现该属性，则视频在就绪后马上播放。</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
-</tr>
-<tr>
-<td>muted</td>
-<td>muted</td>
-<td>规定视频的音频输出应该被静音。</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>preload</td>
-<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放的视频的 URL。</td>
-</tr>
-</tbody></table>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>HTML5</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>input标签详解</title>
     <url>/2021/04/12/input%E6%A0%87%E7%AD%BE%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="input"><a href="#input" class="headerlink" title="input"></a>input</h2><h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
@@ -358,6 +243,174 @@
       </tags>
   </entry>
   <entry>
+    <title>video和audio详解</title>
+    <url>/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持Video标签。</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>video</code>:定义一个视频</li>
+<li><code>source</code>:定义多种媒体资源，如video，audio</li>
+<li>只支持: .mp4后缀(.h264编码格式),和.webm后缀(专用web视频格式),以及.ogg后缀(音频文件)</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>Html5 Video 可以添加多个source源来进行兼容适配,这样,当第一个源读取出问题时会自动读取下一个源.<br>比如可以同时在前面加上.webm和.mp4源,这样一个出错时会自动读取另一个可用源(因为不同浏览器,支持的格式是不一样的)</li>
+</ul>
+<h3 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h3><p><img src="https://images2015.cnblogs.com/blog/406799/201606/406799-20160601115737352-1458849421.png" alt="浏览器兼容"></p>
+<h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
+<li><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>px</td>
+<td>设置视频播放器的高度。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>px</td>
+<td>设置视频的宽度</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>poster</td>
+<td>URL</td>
+<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+</tbody></table>
+<h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+</tbody></table>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>HTML5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>响应式开发</title>
+    <url>/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<p>#移动WEB开发</p>
+<h2 id="响应式开发"><a href="#响应式开发" class="headerlink" title="响应式开发"></a>响应式开发</h2><h3 id="什么是响应式网站"><a href="#什么是响应式网站" class="headerlink" title="什么是响应式网站"></a>什么是响应式网站</h3><ul>
+<li>就是在不同终端设备上和任何屏幕尺寸的设备上都可以完美展示网页<h3 id="响应式网站的概念"><a href="#响应式网站的概念" class="headerlink" title="响应式网站的概念"></a>响应式网站的概念</h3></li>
+<li>flexible | grid | layout 弹性网格布局</li>
+<li>flexible | image 弹性图片</li>
+<li>media queries 媒体查询<h3 id="响应式网站的优点"><a href="#响应式网站的优点" class="headerlink" title="响应式网站的优点"></a>响应式网站的优点</h3></li>
+<li>减少工作量<ul>
+<li>网站、设计、代码、内容都 只需要一份</li>
+<li>多出来的工作量只是JS脚本、CSS样式做一些改变</li>
+</ul>
+</li>
+<li>节省时间</li>
+<li>每个设备都能得到正确的显示</li>
+<li>搜索优化<h3 id="响应式网站的缺点"><a href="#响应式网站的缺点" class="headerlink" title="响应式网站的缺点"></a>响应式网站的缺点</h3></li>
+<li>会加载更多的样式和脚本资源</li>
+<li>设计比较难精确定位和控制</li>
+<li>老版本浏览器兼容不好<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
+<p>@mendia all and (min-width:800px) and (orientation:landscape){…}</p>
+</blockquote>
+</li>
+<li>and 两者都匹配</li>
+<li>or 任意条件匹配</li>
+<li>not 所有条件都不匹配</li>
+</ul>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>width:视口宽度</li>
+<li>height:视口高度</li>
+<li>device-width:设备屏幕的宽度</li>
+<li>device-height:设备屏幕的高度</li>
+<li>orientation:设备处于横向或纵向</li>
+<li>aspect-ratio:设备的宽高比(16:9 | 4:3 | …)</li>
+<li>color:每种颜色的位数(min-color:16位 | 8位)</li>
+<li>resolution:检测屏幕或打印机的分辨率</li>
+<li><strong>以上所有属性都可以加max-或min-</strong></li>
+</ul>
+<h3 id="viewport视口"><a href="#viewport视口" class="headerlink" title="viewport视口"></a>viewport视口</h3><ul>
+<li>布局视口(layout viewport):宽度不变的</li>
+<li>可视视口(visual viewport):显示布局视口的不同内容<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width&quot;</span> <span class="attr">minimum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">maximum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">user-scalable</span>=<span class="string">&quot;no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="px-em和rem的区别"><a href="#px-em和rem的区别" class="headerlink" title="px,em和rem的区别"></a>px,em和rem的区别</h2></li>
+<li>px相当于屏幕分辨率的一个单位，1px相当于一个像素，固定的单位</li>
+<li>em相对单位</li>
+<li>em的相对参照物为父元素的<code>font-size</code></li>
+<li>em具有继承的特点，如果父元素没有设置<code>font-size</code>就往上找</li>
+<li>默认值为1em = 16px</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>响应式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>变形，过渡和动画</title>
     <url>/2021/04/14/%E5%8F%98%E5%BD%A2%EF%BC%8C%E8%BF%87%E6%B8%A1%E5%92%8C%E5%8A%A8%E7%94%BB/</url>
     <content><![CDATA[<h1 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h1><h2 id="Transform-变形"><a href="#Transform-变形" class="headerlink" title="Transform(变形)"></a>Transform(变形)</h2><ul>
@@ -496,59 +549,6 @@
 ]]></content>
       <tags>
         <tag>CSS3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>响应式开发</title>
-    <url>/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</url>
-    <content><![CDATA[<p>#移动WEB开发</p>
-<h2 id="响应式开发"><a href="#响应式开发" class="headerlink" title="响应式开发"></a>响应式开发</h2><h3 id="什么是响应式网站"><a href="#什么是响应式网站" class="headerlink" title="什么是响应式网站"></a>什么是响应式网站</h3><ul>
-<li>就是在不同终端设备上和任何屏幕尺寸的设备上都可以完美展示网页<h3 id="响应式网站的概念"><a href="#响应式网站的概念" class="headerlink" title="响应式网站的概念"></a>响应式网站的概念</h3></li>
-<li>flexible | grid | layout 弹性网格布局</li>
-<li>flexible | image 弹性图片</li>
-<li>media queries 媒体查询<h3 id="响应式网站的优点"><a href="#响应式网站的优点" class="headerlink" title="响应式网站的优点"></a>响应式网站的优点</h3></li>
-<li>减少工作量<ul>
-<li>网站、设计、代码、内容都 只需要一份</li>
-<li>多出来的工作量只是JS脚本、CSS样式做一些改变</li>
-</ul>
-</li>
-<li>节省时间</li>
-<li>每个设备都能得到正确的显示</li>
-<li>搜索优化<h3 id="响应式网站的缺点"><a href="#响应式网站的缺点" class="headerlink" title="响应式网站的缺点"></a>响应式网站的缺点</h3></li>
-<li>会加载更多的样式和脚本资源</li>
-<li>设计比较难精确定位和控制</li>
-<li>老版本浏览器兼容不好<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
-<p>@mendia all and (min-width:800px) and (orientation:landscape){…}</p>
-</blockquote>
-</li>
-<li>and 两者都匹配</li>
-<li>or 任意条件匹配</li>
-<li>not 所有条件都不匹配</li>
-</ul>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
-<li>width:视口宽度</li>
-<li>height:视口高度</li>
-<li>device-width:设备屏幕的宽度</li>
-<li>device-height:设备屏幕的高度</li>
-<li>orientation:设备处于横向或纵向</li>
-<li>aspect-ratio:设备的宽高比(16:9 | 4:3 | …)</li>
-<li>color:每种颜色的位数(min-color:16位 | 8位)</li>
-<li>resolution:检测屏幕或打印机的分辨率</li>
-<li><strong>以上所有属性都可以加max-或min-</strong></li>
-</ul>
-<h3 id="viewport视口"><a href="#viewport视口" class="headerlink" title="viewport视口"></a>viewport视口</h3><ul>
-<li>布局视口(layout viewport):宽度不变的</li>
-<li>可视视口(visual viewport):显示布局视口的不同内容<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width&quot;</span> <span class="attr">minimum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">maximum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">user-scalable</span>=<span class="string">&quot;no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="px-em和rem的区别"><a href="#px-em和rem的区别" class="headerlink" title="px,em和rem的区别"></a>px,em和rem的区别</h2></li>
-<li>px相当于屏幕分辨率的一个单位，1px相当于一个像素，固定的单位</li>
-<li>em相对单位</li>
-<li>em的相对参照物为父元素的<code>font-size</code></li>
-<li>em具有继承的特点，如果父元素没有设置<code>font-size</code>就往上找</li>
-<li>默认值为1em = 16px</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>响应式</tag>
       </tags>
   </entry>
   <entry>
