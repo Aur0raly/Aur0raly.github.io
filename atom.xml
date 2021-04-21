@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Aur0ra</title>
+  
+  <subtitle>落俗不可避免，浪漫至死不渝</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2021-04-21T00:43:05.296Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Aur0ra</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>响应式开发</title>
+    <link href="http://example.com/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/"/>
+    <id>http://example.com/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</id>
+    <published>2021-04-21T00:42:13.000Z</published>
+    <updated>2021-04-21T00:43:05.296Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;#移动WEB开发&lt;/p&gt;
+&lt;h2 id=&quot;响应式开发&quot;&gt;&lt;a href=&quot;#响应式开发&quot; class=&quot;headerlink&quot; title=&quot;响应式开发&quot;&gt;&lt;/a&gt;响应式开发&lt;/h2&gt;&lt;h3 id=&quot;什么是响应式网站&quot;&gt;&lt;a href=&quot;#什么是响应式网站&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="响应式" scheme="http://example.com/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>结构伪类选择器</title>
+    <link href="http://example.com/2021/04/20/%E7%BB%93%E6%9E%84%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8/"/>
+    <id>http://example.com/2021/04/20/%E7%BB%93%E6%9E%84%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8/</id>
+    <published>2021-04-20T05:12:06.000Z</published>
+    <updated>2021-04-20T05:12:25.915Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;#CSS3&lt;/p&gt;
+&lt;h2 id=&quot;结构性伪类选择器&quot;&gt;&lt;a href=&quot;#结构性伪类选择器&quot; class=&quot;headerlink&quot; title=&quot;结构性伪类选择器&quot;&gt;&lt;/a&gt;结构性伪类选择器&lt;/h2&gt;&lt;h3 id=&quot;预定义&quot;&gt;&lt;a href=&quot;#预定义&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CSS3" scheme="http://example.com/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>属性选择器</title>
+    <link href="http://example.com/2021/04/15/%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8/"/>
+    <id>http://example.com/2021/04/15/%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8/</id>
+    <published>2021-04-15T05:12:43.000Z</published>
+    <updated>2021-04-20T05:12:57.336Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CSS3&quot;&gt;&lt;a href=&quot;#CSS3&quot; class=&quot;headerlink&quot; title=&quot;CSS3&quot;&gt;&lt;/a&gt;CSS3&lt;/h1&gt;&lt;h2 id=&quot;属性选择器&quot;&gt;&lt;a href=&quot;#属性选择器&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CSS3" scheme="http://example.com/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>变形，过渡和动画</title>
+    <link href="http://example.com/2021/04/14/%E5%8F%98%E5%BD%A2%EF%BC%8C%E8%BF%87%E6%B8%A1%E5%92%8C%E5%8A%A8%E7%94%BB/"/>
+    <id>http://example.com/2021/04/14/%E5%8F%98%E5%BD%A2%EF%BC%8C%E8%BF%87%E6%B8%A1%E5%92%8C%E5%8A%A8%E7%94%BB/</id>
+    <published>2021-04-14T05:11:35.000Z</published>
+    <updated>2021-04-20T05:11:52.228Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CSS3&quot;&gt;&lt;a href=&quot;#CSS3&quot; class=&quot;headerlink&quot; title=&quot;CSS3&quot;&gt;&lt;/a&gt;CSS3&lt;/h1&gt;&lt;h2 id=&quot;Transform-变形&quot;&gt;&lt;a href=&quot;#Transform-变形&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CSS3" scheme="http://example.com/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>video和audio详解</title>
+    <link href="http://example.com/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://example.com/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</id>
+    <published>2021-04-13T05:10:41.000Z</published>
+    <updated>2021-04-20T05:11:09.727Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;HTML5&quot;&gt;&lt;a href=&quot;#HTML5&quot; class=&quot;headerlink&quot; title=&quot;HTML5&quot;&gt;&lt;/a&gt;HTML5&lt;/h1&gt;&lt;h2 id=&quot;video&quot;&gt;&lt;a href=&quot;#video&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="HTML5" scheme="http://example.com/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>input标签详解</title>
+    <link href="http://example.com/2021/04/12/input%E6%A0%87%E7%AD%BE%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://example.com/2021/04/12/input%E6%A0%87%E7%AD%BE%E8%AF%A6%E8%A7%A3/</id>
+    <published>2021-04-12T05:09:46.000Z</published>
+    <updated>2021-04-20T05:10:23.699Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;HTML5&quot;&gt;&lt;a href=&quot;#HTML5&quot; class=&quot;headerlink&quot; title=&quot;HTML5&quot;&gt;&lt;/a&gt;HTML5&lt;/h1&gt;&lt;h2 id=&quot;input&quot;&gt;&lt;a href=&quot;#input&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="HTML5" scheme="http://example.com/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>语义化标签</title>
+    <link href="http://example.com/2021/04/10/%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE/"/>
+    <id>http://example.com/2021/04/10/%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE/</id>
+    <published>2021-04-10T04:54:03.000Z</published>
+    <updated>2021-04-20T05:09:32.717Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;HTML5&quot;&gt;&lt;a href=&quot;#HTML5&quot; class=&quot;headerlink&quot; title=&quot;HTML5&quot;&gt;&lt;/a&gt;HTML5&lt;/h1&gt;&lt;h2 id=&quot;语义化标签&quot;&gt;&lt;a href=&quot;#语义化标签&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="HTML5" scheme="http://example.com/tags/HTML5/"/>
+    
+  </entry>
+  
+</feed>
