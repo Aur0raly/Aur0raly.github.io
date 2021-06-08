@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>响应式开发 |  Aur0ra</title>
+      <title>AJAX |  Aur0ra</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -46,7 +46,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-响应式开发"
+  id="post-AJAX"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -57,7 +57,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  响应式开发
+  AJAX
 </h1>
  
 
@@ -65,15 +65,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/" class="article-date">
-  <time datetime="2021-04-21T00:42:13.000Z" itemprop="datePublished">2021-04-21</time>
+      <a href="/2021/06/08/AJAX/" class="article-date">
+  <time datetime="2021-06-08T01:18:04.000Z" itemprop="datePublished">2021-06-08</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">461</span>
+            <span class="post-count">878</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -97,51 +97,85 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>#移动WEB开发</p>
-<h2 id="响应式开发"><a href="#响应式开发" class="headerlink" title="响应式开发"></a>响应式开发</h2><h3 id="什么是响应式网站"><a href="#什么是响应式网站" class="headerlink" title="什么是响应式网站"></a>什么是响应式网站</h3><ul>
-<li>就是在不同终端设备上和任何屏幕尺寸的设备上都可以完美展示网页<h3 id="响应式网站的概念"><a href="#响应式网站的概念" class="headerlink" title="响应式网站的概念"></a>响应式网站的概念</h3></li>
-<li>flexible | grid | layout 弹性网格布局</li>
-<li>flexible | image 弹性图片</li>
-<li>media queries 媒体查询<h3 id="响应式网站的优点"><a href="#响应式网站的优点" class="headerlink" title="响应式网站的优点"></a>响应式网站的优点</h3></li>
-<li>减少工作量<ul>
-<li>网站、设计、代码、内容都 只需要一份</li>
-<li>多出来的工作量只是JS脚本、CSS样式做一些改变</li>
-</ul>
-</li>
-<li>节省时间</li>
-<li>每个设备都能得到正确的显示</li>
-<li>搜索优化<h3 id="响应式网站的缺点"><a href="#响应式网站的缺点" class="headerlink" title="响应式网站的缺点"></a>响应式网站的缺点</h3></li>
-<li>会加载更多的样式和脚本资源</li>
-<li>设计比较难精确定位和控制</li>
-<li>老版本浏览器兼容不好<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
-<p>@mendia all and (min-width:800px) and (orientation:landscape){…}</p>
+  <h1 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h1><blockquote>
+<p><code>Ajax</code> 是一种在<strong>无需重新加载整个网页</strong>的情况下，能够更新部分网页。<br>通过在<strong>后台与服务器进行少量数据交换</strong>，Ajax 可以使网页实现异步更新。<br>这意味着可以在<code>不重新加载整个网页的情况下</code>，对网页的某部分进行更新。</p>
 </blockquote>
+<h2 id="利用Ajax可以做"><a href="#利用Ajax可以做" class="headerlink" title="利用Ajax可以做"></a>利用Ajax可以做</h2><ul>
+<li>注册时，输入用户名自动检测用户是否存在</li>
+<li>登陆时，提示用户名密码错误</li>
+<li>删除数据行时，将行ID发送到后台，后台在数据库中删除，后台删除后，页面DOM也随之删除</li>
+</ul>
+<h2 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h2><p>客户端和服务器相互通信3的基础上</p>
+<ul>
+<li><p><strong>同步</strong>：客户端<strong>必须</strong>等待服务器的响应，在等待的期间客户端不能做其他操作</p>
 </li>
-<li>and 两者都匹配</li>
-<li>or 任意条件匹配</li>
-<li>not 所有条件都不匹配</li>
+<li><p><strong>异步</strong>：客户端<strong>不需要</strong>等待服务器的响应，在服务器处理请求的过程中，客户端可以进行其他的操作</p>
+<p><img src="https://img-blog.csdnimg.cn/20200722162547143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTQwNjY1MQ==,size_16,color_FFFFFF,t_70#pic_center" alt="ty"></p>
+</li>
 </ul>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
-<li>width:视口宽度</li>
-<li>height:视口高度</li>
-<li>device-width:设备屏幕的宽度</li>
-<li>device-height:设备屏幕的高度</li>
-<li>orientation:设备处于横向或纵向</li>
-<li>aspect-ratio:设备的宽高比(16:9 | 4:3 | …)</li>
-<li>color:每种颜色的位数(min-color:16位 | 8位)</li>
-<li>resolution:检测屏幕或打印机的分辨率</li>
-<li><strong>以上所有属性都可以加max-或min-</strong></li>
+<h1 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h1><h2 id="创建核心对象"><a href="#创建核心对象" class="headerlink" title="创建核心对象"></a>创建核心对象</h2><p>创建 XMLHttpRequest 对象的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable = <span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立链接"><a href="#建立链接" class="headerlink" title="建立链接"></a>建立链接</h2><h3 id="1-向服务器发送请求"><a href="#1-向服务器发送请求" class="headerlink" title="1.向服务器发送请求"></a>1.向服务器发送请求</h3><ul>
+<li>如需将请求发送到服务器，我们使用 <code>XMLHttpRequest</code> 对象的 <code>open()</code> 和 <code>send()</code> 方法：</li>
 </ul>
-<h3 id="viewport视口"><a href="#viewport视口" class="headerlink" title="viewport视口"></a>viewport视口</h3><ul>
-<li>布局视口(layout viewport):宽度不变的</li>
-<li>可视视口(visual viewport):显示布局视口的不同内容<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width&quot;</span> <span class="attr">minimum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">maximum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">user-scalable</span>=<span class="string">&quot;no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="px-em和rem的区别"><a href="#px-em和rem的区别" class="headerlink" title="px,em和rem的区别"></a>px,em和rem的区别</h2></li>
-<li>px相当于屏幕分辨率的一个单位，1px相当于一个像素，固定的单位</li>
-<li>em相对单位</li>
-<li>em的相对参照物为父元素的<code>font-size</code></li>
-<li>em具有继承的特点，如果父元素没有设置<code>font-size</code>就往上找</li>
-<li>默认值为1em = 16px</li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;test1.txt&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>spen(method, url, async)</code></p>
+<ul>
+<li>规定请求的类型，URL以及是否异步处理请求<ul>
+<li>method：请求的类型，GET或POST</li>
+<li>url：文件在服务器上的位置</li>
+<li>async：true（异步），false（同步）</li>
 </ul>
+</li>
+</ul>
+</li>
+<li><p><code>send(string)</code></p>
+<ul>
+<li>将请求发送到服务器<ul>
+<li>string：仅用于POST请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>与 POST 相比，GET 更简单也更快，大部分情况下都适用</p>
+<ul>
+<li>无法使用缓存文件（更新服务器上的文件或数据库）</li>
+<li>向服务器发送大量数据（POST没有数据量限制）</li>
+<li>发送包含未知字符的用户输入，POST 比 GET 更稳定也更可靠</li>
+</ul>
+</li>
+</ul>
+<h4 id="两者的区别"><a href="#两者的区别" class="headerlink" title="两者的区别"></a>两者的区别</h4><ul>
+<li><p>GET：请求参数在URL后边拼接，send 方法为空参</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;&lt;URL&gt;&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">xmlhttp.send()</span><br></pre></td></tr></table></figure></li>
+<li><p>POST：请求参数在send方法中定义</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;ajax_test.asp&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">xmlhttp.setRequestHeader(<span class="string">&#x27;content-type&#x27;</span>, <span class="string">&#x27;application/x-www-form0urlencoded&#x27;</span>)</span><br><span class="line">xmlhttp.send(<span class="string">&#x27;&lt;url&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="接收服务器响应，处理数据"><a href="#接收服务器响应，处理数据" class="headerlink" title="接收服务器响应，处理数据"></a>接收服务器响应，处理数据</h3><ul>
+<li><p>获取方式：</p>
+<ul>
+<li><code>responseText</code>：接受字符串形式的响应数据</li>
+<li><code>responseXML</code>：获得XML形式的响应数据</li>
+</ul>
+</li>
+<li><p>什么时候获取</p>
+<blockquote>
+<p>服务器响应成功后获取</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xmlhtt.onreadystatuschange =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(xmlhttp.readyStatus == <span class="number">4</span> &amp;&amp; xmlhttp.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div&#x27;</span>).innerHTML = xmlhtt[.responseText]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其中的数字代表</p>
+<p><img src="https://img-blog.csdnimg.cn/20200402225407363.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk1NDA3MA==,size_16,color_FFFFFF,t_70" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="完整实现方法"><a href="#完整实现方法" class="headerlink" title="完整实现方法"></a>完整实现方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.创建核心对象</span></span><br><span class="line">        <span class="keyword">var</span> xmlhttp;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</span><br><span class="line">        &#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></span><br><span class="line">            xmlhttp=<span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;<span class="comment">// code for IE6, IE5</span></span><br><span class="line">            xmlhttp=<span class="keyword">new</span> ActiveXObject(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&lt;---------------------------------------------------------------------&gt;</span><br><span class="line">        <span class="comment">//2. 建立连接</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            参数：</span></span><br><span class="line"><span class="comment">                1. 请求方式：GET、POST</span></span><br><span class="line"><span class="comment">                    * get方式，请求参数在URL后边拼接。send方法为空参</span></span><br><span class="line"><span class="comment">                    * post方式，请求参数在send方法中定义</span></span><br><span class="line"><span class="comment">                2. 请求的URL：</span></span><br><span class="line"><span class="comment">                3. 同步或异步请求：true（异步）或 false（同步）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        xmlhttp.open(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;ajaxServlet?username=tom&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">&lt;---------------------------------------------------------------------&gt;</span><br><span class="line">        <span class="comment">//3.发送请求</span></span><br><span class="line">        xmlhttp.send();</span><br><span class="line">&lt;---------------------------------------------------------------------&gt;</span><br><span class="line">        <span class="comment">//4.接受并处理来自服务器的响应结果</span></span><br><span class="line">        <span class="comment">//获取方式 ：xmlhttp.responseText</span></span><br><span class="line">        <span class="comment">//什么时候获取？当服务器响应成功后再获取</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//当xmlhttp对象的就绪状态改变时，触发事件onreadystatechange。</span></span><br><span class="line">        xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//判断readyState就绪状态是否为4，判断status响应状态码是否为200</span></span><br><span class="line">            <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span> &amp;&amp; xmlhttp.status==<span class="number">200</span>)</span><br><span class="line">            &#123;</span><br><span class="line">               <span class="comment">//获取服务器的响应结果</span></span><br><span class="line">                <span class="keyword">var</span> responseText = xmlhttp.responseText;</span><br><span class="line">                alert(responseText);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
  
       <!-- reward -->
       
@@ -206,12 +240,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/06/08/AJAX/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
 
     </footer>
   </div>
@@ -219,19 +253,10 @@
    
   <nav class="article-nav">
     
+    
       <a href="/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            同步与异步
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2021/04/20/%E7%BB%93%E6%9E%84%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">结构伪类选择器</div>
+        <div class="article-nav-title">同步与异步</div>
       </a>
     
   </nav>

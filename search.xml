@@ -1,6 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AJAX</title>
+    <url>/2021/06/08/AJAX/</url>
+    <content><![CDATA[<h1 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h1><blockquote>
+<p><code>Ajax</code> 是一种在<strong>无需重新加载整个网页</strong>的情况下，能够更新部分网页。<br>通过在<strong>后台与服务器进行少量数据交换</strong>，Ajax 可以使网页实现异步更新。<br>这意味着可以在<code>不重新加载整个网页的情况下</code>，对网页的某部分进行更新。</p>
+</blockquote>
+<h2 id="利用Ajax可以做"><a href="#利用Ajax可以做" class="headerlink" title="利用Ajax可以做"></a>利用Ajax可以做</h2><ul>
+<li>注册时，输入用户名自动检测用户是否存在</li>
+<li>登陆时，提示用户名密码错误</li>
+<li>删除数据行时，将行ID发送到后台，后台在数据库中删除，后台删除后，页面DOM也随之删除</li>
+</ul>
+<h2 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h2><p>客户端和服务器相互通信3的基础上</p>
+<ul>
+<li><p><strong>同步</strong>：客户端<strong>必须</strong>等待服务器的响应，在等待的期间客户端不能做其他操作</p>
+</li>
+<li><p><strong>异步</strong>：客户端<strong>不需要</strong>等待服务器的响应，在服务器处理请求的过程中，客户端可以进行其他的操作</p>
+<p><img src="https://img-blog.csdnimg.cn/20200722162547143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTQwNjY1MQ==,size_16,color_FFFFFF,t_70#pic_center" alt="ty"></p>
+</li>
+</ul>
+<h1 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h1><h2 id="创建核心对象"><a href="#创建核心对象" class="headerlink" title="创建核心对象"></a>创建核心对象</h2><p>创建 XMLHttpRequest 对象的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">variable = <span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立链接"><a href="#建立链接" class="headerlink" title="建立链接"></a>建立链接</h2><h3 id="1-向服务器发送请求"><a href="#1-向服务器发送请求" class="headerlink" title="1.向服务器发送请求"></a>1.向服务器发送请求</h3><ul>
+<li>如需将请求发送到服务器，我们使用 <code>XMLHttpRequest</code> 对象的 <code>open()</code> 和 <code>send()</code> 方法：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;test1.txt&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>spen(method, url, async)</code></p>
+<ul>
+<li>规定请求的类型，URL以及是否异步处理请求<ul>
+<li>method：请求的类型，GET或POST</li>
+<li>url：文件在服务器上的位置</li>
+<li>async：true（异步），false（同步）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>send(string)</code></p>
+<ul>
+<li>将请求发送到服务器<ul>
+<li>string：仅用于POST请求</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>与 POST 相比，GET 更简单也更快，大部分情况下都适用</p>
+<ul>
+<li>无法使用缓存文件（更新服务器上的文件或数据库）</li>
+<li>向服务器发送大量数据（POST没有数据量限制）</li>
+<li>发送包含未知字符的用户输入，POST 比 GET 更稳定也更可靠</li>
+</ul>
+</li>
+</ul>
+<h4 id="两者的区别"><a href="#两者的区别" class="headerlink" title="两者的区别"></a>两者的区别</h4><ul>
+<li><p>GET：请求参数在URL后边拼接，send 方法为空参</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;&lt;URL&gt;&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">xmlhttp.send()</span><br></pre></td></tr></table></figure></li>
+<li><p>POST：请求参数在send方法中定义</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;ajax_test.asp&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">xmlhttp.setRequestHeader(<span class="string">&#x27;content-type&#x27;</span>, <span class="string">&#x27;application/x-www-form0urlencoded&#x27;</span>)</span><br><span class="line">xmlhttp.send(<span class="string">&#x27;&lt;url&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="接收服务器响应，处理数据"><a href="#接收服务器响应，处理数据" class="headerlink" title="接收服务器响应，处理数据"></a>接收服务器响应，处理数据</h3><ul>
+<li><p>获取方式：</p>
+<ul>
+<li><code>responseText</code>：接受字符串形式的响应数据</li>
+<li><code>responseXML</code>：获得XML形式的响应数据</li>
+</ul>
+</li>
+<li><p>什么时候获取</p>
+<blockquote>
+<p>服务器响应成功后获取</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">xmlhtt.onreadystatuschange =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(xmlhttp.readyStatus == <span class="number">4</span> &amp;&amp; xmlhttp.status == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">&#x27;div&#x27;</span>).innerHTML = xmlhtt[.responseText]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其中的数字代表</p>
+<p><img src="https://img-blog.csdnimg.cn/20200402225407363.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDk1NDA3MA==,size_16,color_FFFFFF,t_70" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="完整实现方法"><a href="#完整实现方法" class="headerlink" title="完整实现方法"></a>完整实现方法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.创建核心对象</span></span><br><span class="line">        <span class="keyword">var</span> xmlhttp;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</span><br><span class="line">        &#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></span><br><span class="line">            xmlhttp=<span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;<span class="comment">// code for IE6, IE5</span></span><br><span class="line">            xmlhttp=<span class="keyword">new</span> ActiveXObject(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&lt;---------------------------------------------------------------------&gt;</span><br><span class="line">        <span class="comment">//2. 建立连接</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            参数：</span></span><br><span class="line"><span class="comment">                1. 请求方式：GET、POST</span></span><br><span class="line"><span class="comment">                    * get方式，请求参数在URL后边拼接。send方法为空参</span></span><br><span class="line"><span class="comment">                    * post方式，请求参数在send方法中定义</span></span><br><span class="line"><span class="comment">                2. 请求的URL：</span></span><br><span class="line"><span class="comment">                3. 同步或异步请求：true（异步）或 false（同步）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        xmlhttp.open(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;ajaxServlet?username=tom&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">&lt;---------------------------------------------------------------------&gt;</span><br><span class="line">        <span class="comment">//3.发送请求</span></span><br><span class="line">        xmlhttp.send();</span><br><span class="line">&lt;---------------------------------------------------------------------&gt;</span><br><span class="line">        <span class="comment">//4.接受并处理来自服务器的响应结果</span></span><br><span class="line">        <span class="comment">//获取方式 ：xmlhttp.responseText</span></span><br><span class="line">        <span class="comment">//什么时候获取？当服务器响应成功后再获取</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//当xmlhttp对象的就绪状态改变时，触发事件onreadystatechange。</span></span><br><span class="line">        xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//判断readyState就绪状态是否为4，判断status响应状态码是否为200</span></span><br><span class="line">            <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span> &amp;&amp; xmlhttp.status==<span class="number">200</span>)</span><br><span class="line">            &#123;</span><br><span class="line">               <span class="comment">//获取服务器的响应结果</span></span><br><span class="line">                <span class="keyword">var</span> responseText = xmlhttp.responseText;</span><br><span class="line">                alert(responseText);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>video和audio详解</title>
+    <url>/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持Video标签。</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>video</code>:定义一个视频</li>
+<li><code>source</code>:定义多种媒体资源，如video，audio</li>
+<li>只支持: .mp4后缀(.h264编码格式),和.webm后缀(专用web视频格式),以及.ogg后缀(音频文件)</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>Html5 Video 可以添加多个source源来进行兼容适配,这样,当第一个源读取出问题时会自动读取下一个源.<br>比如可以同时在前面加上.webm和.mp4源,这样一个出错时会自动读取另一个可用源(因为不同浏览器,支持的格式是不一样的)</li>
+</ul>
+<h3 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h3><p><img src="https://images2015.cnblogs.com/blog/406799/201606/406799-20160601115737352-1458849421.png" alt="浏览器兼容"></p>
+<h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
+<li><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>px</td>
+<td>设置视频播放器的高度。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>px</td>
+<td>设置视频的宽度</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>poster</td>
+<td>URL</td>
+<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+</tbody></table>
+<h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+</tbody></table>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>HTML5</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>input标签详解</title>
     <url>/2021/04/12/input%E6%A0%87%E7%AD%BE%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="input"><a href="#input" class="headerlink" title="input"></a>input</h2><h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
@@ -243,118 +445,77 @@
       </tags>
   </entry>
   <entry>
-    <title>video和audio详解</title>
-    <url>/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持Video标签。</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>同步与异步</title>
+    <url>/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/</url>
+    <content><![CDATA[<h1 id="同步模式与异步模式"><a href="#同步模式与异步模式" class="headerlink" title="同步模式与异步模式"></a>同步模式与异步模式</h1><h2 id="同步模式"><a href="#同步模式" class="headerlink" title="同步模式"></a>同步模式</h2><ul>
+<li>同步模式指的是同一时间只能执行一条命令，后续的命令只能在上一条命令执行完才能被执行</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global start&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;bar task&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;foo task&#x27;</span>)</span><br><span class="line">    bar ()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
+<li>将所有代码在调用栈中<strong>整合为一个匿名函数</strong>，相当于把全部的代码放到一个匿名函数中去执行</li>
+<li>开始执行第一行代码<code>console.log(&#39;global start&#39;)</code>，将这行代码压入调用栈执行，执行过程中控制带打印出<code>global start</code>，执行结束弹出这行代码，然后执行下一行</li>
+<li>接下来是两个函数的声明，<strong>在JS中，不管是函数还是变量的声明都不会产生调用</strong>，执行继续往下</li>
+<li>执行到<code>foo()</code>，对函数的调用将会被压入调用栈，然后开始执行这个<code>foo()</code>函数</li>
+<li><code>foo()</code>函数开始先是打印了<code>console.log(&#39;foo task&#39;)</code>，打印完成之后执行调用<code>bar()</code>函数，<code>bar()</code>函数也会被放入调用栈</li>
+<li>执行完<code>bar()</code>函数中的<code>console.log(&#39;bar task&#39;)</code>后，<code>bar()</code>函数被抛出调用栈，此时<code>foo()</code>函数执行完毕，抛出调用栈</li>
+<li>最后执行<code>console.log(&#39;global end&#39;)</code></li>
+</ol>
+<h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3><ul>
+<li>同步模式一次只执行一条命令，如果其中一条命令执行的时间很长，<strong>那他后面的任务就会被延迟，这种延迟被称为阻塞</strong></li>
+</ul>
+<h2 id="异步模式"><a href="#异步模式" class="headerlink" title="异步模式"></a>异步模式</h2><ul>
+<li>不会等待这个任务结束才会执行下一个任务</li>
+<li>对于耗时任务，开启过后就立即往后执行下一个任务</li>
+<li>耗时任务的后续逻辑一般会通过回调函数的方式定义</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global begin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer1 invoke&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">1800</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer2</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer2 invoke&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;inner invoke&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
+<li>加载整体的代码，在调用栈中整合为一个匿名函数</li>
+<li>开始执行第一行代码，压入调用栈，在控制台中打印<code>global begin</code>，执行完被抛出</li>
+<li>将第一个<code>setTimeout()</code>调用压入调用栈，<code>setTimeout()</code>是一个异步调用，所以在<code>Web APIs</code>中开启一个1.8s的倒计时，然后窒执行下一个函数（开启计数器的时候，<code>timer1</code>的调用已经被完成，抛出调用栈）</li>
+<li>遇到<code>timer2</code>函数，先压入调用栈，然后开启计时器，调用完成抛出调用栈</li>
+<li>执行最后一行代码，并打印到控制台，然后清空调用栈</li>
+<li><code>timer2</code>的倒计时先完成，则把<code>timer2</code>放到消息队列，<code>timer1</code>的倒计时完成，则放到消息队列中的第二位</li>
+<li>一旦消息队列发生变化，则会被<code>event</code>监听到，则把消息队列中的单元放到调用栈中被执行</li>
+</ol>
+<p><img src="https://i.loli.net/2021/06/08/pyaUsborqMti4OY.png" alt="屏幕截图 2021-06-07 201146"></p>
+<h1 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h1><ul>
+<li><p>回调函数可以理解为一件你想要做的事情，你明确知道这件事情应该怎么做，但是你并不知道这件事情依赖的任务什么时候完成，所以最好的解决办法是将这件事情的步骤写入一个函数之中，交给任务的执行者，执行者是知道这件任务什么时候结束的，这样就可以在任务结束后执行这个函数</p>
+</li>
+<li><p>由调用者定义，由执行者执行的函数</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback()</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;这就是一个回调函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;调用者定义这个函数，执行者执行这个函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;其实就是调用者告诉执行者异步任务结束后应该做什么&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/06/08/7UVmIJoSavMB1r2.png" alt="屏幕截图 2021-06-07 201839"></p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><ul>
+<li>就是一个对象，用来表示一个异步任务结束后成功或是失败</li>
+</ul>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">100</span>)  <span class="comment">// 将结束状态修改为成功</span></span><br><span class="line">    <span class="comment">// reject(new Error(&#x27;promise rejected&#x27;))  // 失败</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;resolveed&#x27;</span>, value)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;rejected&#x27;</span>, error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><code>video</code>:定义一个视频</li>
-<li><code>source</code>:定义多种媒体资源，如video，audio</li>
-<li>只支持: .mp4后缀(.h264编码格式),和.webm后缀(专用web视频格式),以及.ogg后缀(音频文件)</li>
+<li><code>resolve()</code>和<code>reject()</code>两者只能有一个存在</li>
 </ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>Html5 Video 可以添加多个source源来进行兼容适配,这样,当第一个源读取出问题时会自动读取下一个源.<br>比如可以同时在前面加上.webm和.mp4源,这样一个出错时会自动读取另一个可用源(因为不同浏览器,支持的格式是不一样的)</li>
-</ul>
-<h3 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h3><p><img src="https://images2015.cnblogs.com/blog/406799/201606/406799-20160601115737352-1458849421.png" alt="浏览器兼容"></p>
-<h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
-<li><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>如果出现该属性，则视频在就绪后马上播放。</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
-</tr>
-<tr>
-<td>height</td>
-<td>px</td>
-<td>设置视频播放器的高度。</td>
-</tr>
-<tr>
-<td>width</td>
-<td>px</td>
-<td>设置视频的宽度</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
-</tr>
-<tr>
-<td>muted</td>
-<td>muted</td>
-<td>规定视频的音频输出应该被静音。</td>
-</tr>
-<tr>
-<td>poster</td>
-<td>URL</td>
-<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>preload</td>
-<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放的视频的 URL。</td>
-</tr>
-</tbody></table>
-<h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>如果出现该属性，则视频在就绪后马上播放。</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
-</tr>
-<tr>
-<td>muted</td>
-<td>muted</td>
-<td>规定视频的音频输出应该被静音。</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>preload</td>
-<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放的视频的 URL。</td>
-</tr>
-</tbody></table>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
+<blockquote>
+<p>执行成功，返回<code>resolveed, 100</code></p>
+<p>执行失败，返回错误对象</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/06/08/eU9LcP74Kyi2bzB.png" alt="屏幕截图 2021-06-07 202452"></p>
+<h2 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, url)</span><br><span class="line">        xhr.responseType = <span class="string">&#x27;json&#x27;</span></span><br><span class="line">        xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">                resolve(<span class="built_in">this</span>.response)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="built_in">this</span>.statusText))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(<span class="string">&#x27;/api/users.json&#x27;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">20</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;jeck&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>promise对象的then()方法会返回一个全新的Promise对象</li>
+<li>后面的then方法就是在为上一个then返回的Promise注册回调</li>
+<li>前面then方法中回调函数的返回值会作为后面then方法回调的参数</li>
+<li>如果回调中返回的Promise，那后面then方法的回调会等待他的结束</li>
 </ul>
 ]]></content>
       <tags>
-        <tag>HTML5</tag>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>

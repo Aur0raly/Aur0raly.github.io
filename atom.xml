@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-21T00:43:05.296Z</updated>
+  <updated>2021-06-08T01:18:43.995Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AJAX</title>
+    <link href="http://example.com/2021/06/08/AJAX/"/>
+    <id>http://example.com/2021/06/08/AJAX/</id>
+    <published>2021-06-08T01:18:04.000Z</published>
+    <updated>2021-06-08T01:18:43.995Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Ajax&quot;&gt;&lt;a href=&quot;#Ajax&quot; class=&quot;headerlink&quot; title=&quot;Ajax&quot;&gt;&lt;/a&gt;Ajax&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Ajax&lt;/code&gt;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>同步与异步</title>
+    <link href="http://example.com/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/"/>
+    <id>http://example.com/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/</id>
+    <published>2021-06-08T01:14:40.000Z</published>
+    <updated>2021-06-08T01:16:51.794Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;同步模式与异步模式&quot;&gt;&lt;a href=&quot;#同步模式与异步模式&quot; class=&quot;headerlink&quot; title=&quot;同步模式与异步模式&quot;&gt;&lt;/a&gt;同步模式与异步模式&lt;/h1&gt;&lt;h2 id=&quot;同步模式&quot;&gt;&lt;a href=&quot;#同步模式&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
   
   <entry>
     <title>响应式开发</title>
