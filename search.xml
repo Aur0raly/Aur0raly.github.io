@@ -88,6 +88,121 @@
       </tags>
   </entry>
   <entry>
+    <title>video和audio详解</title>
+    <url>/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持Video标签。</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>video</code>:定义一个视频</li>
+<li><code>source</code>:定义多种媒体资源，如video，audio</li>
+<li>只支持: .mp4后缀(.h264编码格式),和.webm后缀(专用web视频格式),以及.ogg后缀(音频文件)</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>Html5 Video 可以添加多个source源来进行兼容适配,这样,当第一个源读取出问题时会自动读取下一个源.<br>比如可以同时在前面加上.webm和.mp4源,这样一个出错时会自动读取另一个可用源(因为不同浏览器,支持的格式是不一样的)</li>
+</ul>
+<h3 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h3><p><img src="https://images2015.cnblogs.com/blog/406799/201606/406799-20160601115737352-1458849421.png" alt="浏览器兼容"></p>
+<h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
+<li><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>px</td>
+<td>设置视频播放器的高度。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>px</td>
+<td>设置视频的宽度</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>poster</td>
+<td>URL</td>
+<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+</tbody></table>
+<h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+</tbody></table>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>HTML5</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>input标签详解</title>
     <url>/2021/04/12/input%E6%A0%87%E7%AD%BE%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="input"><a href="#input" class="headerlink" title="input"></a>input</h2><h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
@@ -471,121 +586,6 @@
       </tags>
   </entry>
   <entry>
-    <title>video和audio详解</title>
-    <url>/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持Video标签。</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>video</code>:定义一个视频</li>
-<li><code>source</code>:定义多种媒体资源，如video，audio</li>
-<li>只支持: .mp4后缀(.h264编码格式),和.webm后缀(专用web视频格式),以及.ogg后缀(音频文件)</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>Html5 Video 可以添加多个source源来进行兼容适配,这样,当第一个源读取出问题时会自动读取下一个源.<br>比如可以同时在前面加上.webm和.mp4源,这样一个出错时会自动读取另一个可用源(因为不同浏览器,支持的格式是不一样的)</li>
-</ul>
-<h3 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h3><p><img src="https://images2015.cnblogs.com/blog/406799/201606/406799-20160601115737352-1458849421.png" alt="浏览器兼容"></p>
-<h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
-<li><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>如果出现该属性，则视频在就绪后马上播放。</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
-</tr>
-<tr>
-<td>height</td>
-<td>px</td>
-<td>设置视频播放器的高度。</td>
-</tr>
-<tr>
-<td>width</td>
-<td>px</td>
-<td>设置视频的宽度</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
-</tr>
-<tr>
-<td>muted</td>
-<td>muted</td>
-<td>规定视频的音频输出应该被静音。</td>
-</tr>
-<tr>
-<td>poster</td>
-<td>URL</td>
-<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>preload</td>
-<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放的视频的 URL。</td>
-</tr>
-</tbody></table>
-<h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>如果出现该属性，则视频在就绪后马上播放。</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
-</tr>
-<tr>
-<td>muted</td>
-<td>muted</td>
-<td>规定视频的音频输出应该被静音。</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>preload</td>
-<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放的视频的 URL。</td>
-</tr>
-</tbody></table>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>HTML5</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>同步与异步</title>
     <url>/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/</url>
     <content><![CDATA[<h1 id="同步模式与异步模式"><a href="#同步模式与异步模式" class="headerlink" title="同步模式与异步模式"></a>同步模式与异步模式</h1><h2 id="同步模式"><a href="#同步模式" class="headerlink" title="同步模式"></a>同步模式</h2><ul>
@@ -730,6 +730,55 @@
       </tags>
   </entry>
   <entry>
+    <title>语义化标签</title>
+    <url>/2021/04/10/%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE/</url>
+    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="语义化标签"><a href="#语义化标签" class="headerlink" title="语义化标签"></a>语义化标签</h2><h3 id="HTML5新增的语义化标签有"><a href="#HTML5新增的语义化标签有" class="headerlink" title="HTML5新增的语义化标签有"></a>HTML5新增的语义化标签有</h3><ul>
+<li><code>&lt;article&gt;</code>,<code>&lt;section&gt;</code>,<code>&lt;aside&gt;</code>,<code>&lt;header&gt;</code>,<code>&lt;footer&gt;</code>,<code>&lt;time&gt;</code>等<br><img src="https://img-blog.csdn.net/20180626164405788?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4MTI4MTc5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="区域"><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3></li>
+<li>为了在没用CSS的情况下，页面也能更好的呈现出内容结构，代码结构</li>
+<li>比div标签有更加丰富的含义，方便开发和维护</li>
+<li>方便搜索引擎识别页面结构，有利于SEO</li>
+<li>方便其他设备解析</li>
+<li>有利于合作，遵守W3C标准<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3></li>
+<li>尽可能少使用无语义的标签如div和span</li>
+<li>在语义不明显时，既可以使用div或者p时，尽量用p，因为p在默认情况下有上下间距，对兼容特殊终端有利</li>
+<li>不要使用纯样式标签，如p,font,u等，改用CSS样式</li>
+<li>需要强调的文本，可以包含在strong或者em标签中</li>
+<li>使用表格时，标题要用caption，表头用thead，主体部分用tbody包围，尾部用tfoot包围。表头和一般单元格要区分开，表头用th，单元格用td</li>
+<li>表单域要用fieldset标签包起来，并用legend标签说明表单的用途</li>
+<li>每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性<h2 id="header与hgroup"><a href="#header与hgroup" class="headerlink" title="header与hgroup"></a><code>header</code>与<code>hgroup</code></h2></li>
+<li>放在页面或布局的顶部，一般放置导航栏或标题，如：  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>**信息科技有限公司<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>一个文档中可以包含一对或者一对以上的<code>&lt;header&gt;</code>标签。</li>
+<li>标签的位置是次要的，不一定非要显示在页面的上方，<br>我们可以为任何需要的区块标签添加<code>&lt;header&gt;</code>元素，<br>例如下面将要讲解的<code>&lt;article&gt;</code>、<code>&lt;section&gt;</code>等标签。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hgroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>这是一篇介绍HTML 5语义化标签和更简洁的结构<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>HTML 5<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hgroup</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>如果有多个连续的h1~h6标签则用hgroup标签</li>
+<li>如果有连续多个标题和其他文章数据，h1-h6标签就用hgroup包住，<br>和其他文章元数据一起放入header标签<h2 id="nav标签"><a href="#nav标签" class="headerlink" title="nav标签"></a><code>nav</code>标签</h2></li>
+<li>表示页面的导航，可以在<code>header</code>中使用，还可以显示在侧边栏中，一个页面之中有多个<code>nav</code>标签</li>
+<li>为了方便搜索引擎解析，最好将多个主要的链接放在<code>nav</code>中<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">h1</span>&gt;</span>**信息科技有限公司<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;example.html&quot;</span>&gt;</span>客户案例<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;service_one.html&quot;</span>&gt;</span>技术服务<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>          </span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;aboutus_one.html&quot;</span>&gt;</span>关于我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;connection.html&quot;</span>&gt;</span>联系我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="aside标签"><a href="#aside标签" class="headerlink" title="aside标签"></a><code>aside</code>标签</h2></li>
+<li>所包含的内容不是页面的主要内容、具有独立性，是对页面的补充。</li>
+<li><code>&lt;aside&gt;</code>一般使用在页面、文章的侧边栏、广告、友情链接等区域。<h2 id="footer标签"><a href="#footer标签" class="headerlink" title="footer标签"></a><code>footer</code>标签</h2></li>
+<li>一般被放置在页面或者页面中某个区块的底部，包含版权信息、联系方式等信息。</li>
+<li>一个页面也可以有多个footer<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">small</span>&gt;</span></span><br><span class="line">        版权所有 © 2016-2017 **信息科技有限公司</span><br><span class="line">    <span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="article标签"><a href="#article标签" class="headerlink" title="article标签"></a><code>article</code>标签</h2></li>
+<li><code>&lt;article&gt;</code>元素应该使用在相对比较独立、完整的的内容区块，</li>
+<li>所以我们可以在一篇博客、一个论坛帖子、一篇新闻报道或者一个用户评论中使用<code>&lt;article&gt;</code>元素。</li>
+<li><code>article</code>可以互相嵌套。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">h1</span>&gt;</span>HTML5学习之语义化标签<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>....正文.....<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">footer</span>&gt;</span>版权所有*伪版必究<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="section标签"><a href="#section标签" class="headerlink" title="section标签"></a>section标签</h2></li>
+<li>一组或一节内容<h3 id="lt-div-gt-lt-sction-gt-和article标签的比较"><a href="#lt-div-gt-lt-sction-gt-和article标签的比较" class="headerlink" title="&lt;div&gt;,&lt;sction&gt;和article标签的比较"></a><code>&lt;div&gt;</code>,<code>&lt;sction&gt;</code>和<code>article</code>标签的比较</h3></li>
+<li>div:应用广泛，一个区域</li>
+<li>section:包含的内容是一个明确的主题，通常有标题区域</li>
+<li>article:如果我们的页面中需要一个单独的模块来实现一个单独的功能，就用<code>&lt;article&gt;</code>，<br>其他的时候都用<code>&lt;section&gt;</code><h2 id="time标签"><a href="#time标签" class="headerlink" title="time标签"></a><code>time</code>标签</h2></li>
+<li>可以带格式的时间标签<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2021-4-17&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="mark标签"><a href="#mark标签" class="headerlink" title="mark标签"></a><code>mark</code>标签</h2></li>
+<li>高亮显示<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mark</span>&gt;</span>这是一个mark标签<span class="tag">&lt;/<span class="name">mark</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="address标签"><a href="#address标签" class="headerlink" title="address标签"></a><code>address</code>标签</h2></li>
+<li>address代表区块容器，必须是作为联系信息出现，邮编地址、邮件地址等等,一般出现在footer。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>HTML5</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>结构伪类选择器</title>
     <url>/2021/04/20/%E7%BB%93%E6%9E%84%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8/</url>
     <content><![CDATA[<p>#CSS3</p>
@@ -785,56 +834,7 @@
       </tags>
   </entry>
   <entry>
-    <title>语义化标签</title>
-    <url>/2021/04/10/%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE/</url>
-    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="语义化标签"><a href="#语义化标签" class="headerlink" title="语义化标签"></a>语义化标签</h2><h3 id="HTML5新增的语义化标签有"><a href="#HTML5新增的语义化标签有" class="headerlink" title="HTML5新增的语义化标签有"></a>HTML5新增的语义化标签有</h3><ul>
-<li><code>&lt;article&gt;</code>,<code>&lt;section&gt;</code>,<code>&lt;aside&gt;</code>,<code>&lt;header&gt;</code>,<code>&lt;footer&gt;</code>,<code>&lt;time&gt;</code>等<br><img src="https://img-blog.csdn.net/20180626164405788?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4MTI4MTc5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="区域"><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3></li>
-<li>为了在没用CSS的情况下，页面也能更好的呈现出内容结构，代码结构</li>
-<li>比div标签有更加丰富的含义，方便开发和维护</li>
-<li>方便搜索引擎识别页面结构，有利于SEO</li>
-<li>方便其他设备解析</li>
-<li>有利于合作，遵守W3C标准<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3></li>
-<li>尽可能少使用无语义的标签如div和span</li>
-<li>在语义不明显时，既可以使用div或者p时，尽量用p，因为p在默认情况下有上下间距，对兼容特殊终端有利</li>
-<li>不要使用纯样式标签，如p,font,u等，改用CSS样式</li>
-<li>需要强调的文本，可以包含在strong或者em标签中</li>
-<li>使用表格时，标题要用caption，表头用thead，主体部分用tbody包围，尾部用tfoot包围。表头和一般单元格要区分开，表头用th，单元格用td</li>
-<li>表单域要用fieldset标签包起来，并用legend标签说明表单的用途</li>
-<li>每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性<h2 id="header与hgroup"><a href="#header与hgroup" class="headerlink" title="header与hgroup"></a><code>header</code>与<code>hgroup</code></h2></li>
-<li>放在页面或布局的顶部，一般放置导航栏或标题，如：  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>**信息科技有限公司<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>一个文档中可以包含一对或者一对以上的<code>&lt;header&gt;</code>标签。</li>
-<li>标签的位置是次要的，不一定非要显示在页面的上方，<br>我们可以为任何需要的区块标签添加<code>&lt;header&gt;</code>元素，<br>例如下面将要讲解的<code>&lt;article&gt;</code>、<code>&lt;section&gt;</code>等标签。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hgroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>这是一篇介绍HTML 5语义化标签和更简洁的结构<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>HTML 5<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hgroup</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>如果有多个连续的h1~h6标签则用hgroup标签</li>
-<li>如果有连续多个标题和其他文章数据，h1-h6标签就用hgroup包住，<br>和其他文章元数据一起放入header标签<h2 id="nav标签"><a href="#nav标签" class="headerlink" title="nav标签"></a><code>nav</code>标签</h2></li>
-<li>表示页面的导航，可以在<code>header</code>中使用，还可以显示在侧边栏中，一个页面之中有多个<code>nav</code>标签</li>
-<li>为了方便搜索引擎解析，最好将多个主要的链接放在<code>nav</code>中<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">h1</span>&gt;</span>**信息科技有限公司<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;example.html&quot;</span>&gt;</span>客户案例<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;service_one.html&quot;</span>&gt;</span>技术服务<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>          </span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;aboutus_one.html&quot;</span>&gt;</span>关于我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;connection.html&quot;</span>&gt;</span>联系我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="aside标签"><a href="#aside标签" class="headerlink" title="aside标签"></a><code>aside</code>标签</h2></li>
-<li>所包含的内容不是页面的主要内容、具有独立性，是对页面的补充。</li>
-<li><code>&lt;aside&gt;</code>一般使用在页面、文章的侧边栏、广告、友情链接等区域。<h2 id="footer标签"><a href="#footer标签" class="headerlink" title="footer标签"></a><code>footer</code>标签</h2></li>
-<li>一般被放置在页面或者页面中某个区块的底部，包含版权信息、联系方式等信息。</li>
-<li>一个页面也可以有多个footer<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">small</span>&gt;</span></span><br><span class="line">        版权所有 © 2016-2017 **信息科技有限公司</span><br><span class="line">    <span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="article标签"><a href="#article标签" class="headerlink" title="article标签"></a><code>article</code>标签</h2></li>
-<li><code>&lt;article&gt;</code>元素应该使用在相对比较独立、完整的的内容区块，</li>
-<li>所以我们可以在一篇博客、一个论坛帖子、一篇新闻报道或者一个用户评论中使用<code>&lt;article&gt;</code>元素。</li>
-<li><code>article</code>可以互相嵌套。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">h1</span>&gt;</span>HTML5学习之语义化标签<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>....正文.....<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">footer</span>&gt;</span>版权所有*伪版必究<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="section标签"><a href="#section标签" class="headerlink" title="section标签"></a>section标签</h2></li>
-<li>一组或一节内容<h3 id="lt-div-gt-lt-sction-gt-和article标签的比较"><a href="#lt-div-gt-lt-sction-gt-和article标签的比较" class="headerlink" title="&lt;div&gt;,&lt;sction&gt;和article标签的比较"></a><code>&lt;div&gt;</code>,<code>&lt;sction&gt;</code>和<code>article</code>标签的比较</h3></li>
-<li>div:应用广泛，一个区域</li>
-<li>section:包含的内容是一个明确的主题，通常有标题区域</li>
-<li>article:如果我们的页面中需要一个单独的模块来实现一个单独的功能，就用<code>&lt;article&gt;</code>，<br>其他的时候都用<code>&lt;section&gt;</code><h2 id="time标签"><a href="#time标签" class="headerlink" title="time标签"></a><code>time</code>标签</h2></li>
-<li>可以带格式的时间标签<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2021-4-17&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="mark标签"><a href="#mark标签" class="headerlink" title="mark标签"></a><code>mark</code>标签</h2></li>
-<li>高亮显示<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mark</span>&gt;</span>这是一个mark标签<span class="tag">&lt;/<span class="name">mark</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="address标签"><a href="#address标签" class="headerlink" title="address标签"></a><code>address</code>标签</h2></li>
-<li>address代表区块容器，必须是作为联系信息出现，邮编地址、邮件地址等等,一般出现在footer。</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>HTML5</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>css核心概念“</title>
+    <title>css核心概念</title>
     <url>/2021/06/08/css%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/</url>
     <content><![CDATA[<h1 id="CSS核心概念和知识点"><a href="#CSS核心概念和知识点" class="headerlink" title="CSS核心概念和知识点"></a>CSS核心概念和知识点</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>CSS 的核心功能是将 CSS 属性设定为特定的值。一个属性与值的键值对被称为<strong>声明</strong>（declaration）。</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: red;</span><br></pre></td></tr></table></figure>
