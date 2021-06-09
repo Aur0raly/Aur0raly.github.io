@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CSS值和单位</title>
+    <url>/2021/06/09/CSS%E5%80%BC%E5%92%8C%E5%8D%95%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="CSS-值和单位"><a href="#CSS-值和单位" class="headerlink" title="CSS 值和单位"></a>CSS 值和单位</h1><p>CSS 的声明是由属性和值组成的，而值的类型有许多种：</p>
+<ul>
+<li>数值：长度值 ，用于指定例如元素 width、border-width、font-size 等属性的值；</li>
+<li>百分比：可以用于指定尺寸或长度，例如取决于父容器的 width、height 或默认的 font-size；</li>
+<li>颜色：用于指定 background-color、color 等；</li>
+<li>坐标位置：以屏幕的左上角为坐标原点定位元素的位置，比如常见的 background-position、top、right、bottom 和 left 等属性；</li>
+<li>函数：用于指定资源路径或背景图片的渐变，比如 url()、linear-gradient() 等；</li>
+</ul>
+<h2 id="px"><a href="#px" class="headerlink" title="px"></a>px</h2><p>屏幕分辨率是指在屏幕的横纵方向上的像素点数量，比如分辨率 1920×1080 意味着水平方向含有 1920 个像素数，垂直方向含有 1080 个像素数。</p>
+<p><img src="https://i.loli.net/2021/06/09/JGaKMh5k2fjHNd9.png" alt="image-20210609085758957"></p>
+<p>而 px 表示的是 CSS 中的像素，在 CSS 中它是绝对的长度单位，也是最基础的单位，其他长度单位会自动被浏览器换算成 px。但是对于设备而言，它其实又是相对的长度单位，比如宽高都为 2px，在正常的屏幕下，其实就是 4 个像素点，而在设备像素比(devicePixelRatio) 为 2 的 Retina 屏幕下，它就有 16 个像素点。所以屏幕尺寸一致的情况下，屏幕分辨率越高，显示效果就越细腻。</p>
+<h3 id="设备像素"><a href="#设备像素" class="headerlink" title="设备像素"></a>设备像素</h3><blockquote>
+<p>设备屏幕的物理像素，表示的是屏幕的横纵有多少像素点；和屏幕分辨率是差不多的意思。</p>
+</blockquote>
+<h3 id="设备像素比"><a href="#设备像素比" class="headerlink" title="设备像素比"></a>设备像素比</h3><blockquote>
+<p>设备像素比表示 1 个 CSS 像素等于几个物理像素。</p>
+<p>计算公式：DPR = 物理像素数 / 逻辑像素数；</p>
+<p>在浏览器中可以通过 window.devicePixelRatio 来获取当前屏幕的 DPR。</p>
+</blockquote>
+<h2 id="em"><a href="#em" class="headerlink" title="em"></a>em</h2><p>em 是 CSS 中的相对长度单位中的一个。居然是相对的，那它到底是相对的谁呢？它有 2 层意思：</p>
+<ul>
+<li>在 font-size 中使用是相对于<strong>父元素</strong>的 font-size 大小，比如父元素 font-size: 16px，当给子元素指定 font-size: 2em 的时候，经过计算后它的字体大小会是 32px；</li>
+<li>在其他属性中使用是相对于自身的字体大小，如 width/height/padding/margin 等；</li>
+</ul>
+<p>我们都知道每个浏览器都会给 HTML 根元素 html 设置一个默认的 font-size，而这个值通常是 16px。这也就是为什么 1em = 16px 的原因所在了。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">font-size</span>: <span class="number">2em</span>; &#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123; <span class="attribute">font-size</span>: <span class="number">2em</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于如上一个结构的 HTML，由于根元素 html 的字体大小是 16px，所以 p 标签最终计算出来后的字体大小会是 16 * 2 * 2 = 64px</p>
+<h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p>rem(root em) 和 em 一样，也是一个相对长度单位，不过 rem 相对的是 HTML 的根元素 html。</p>
+<p>rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应网站或者 H5 中。</p>
+<p>比如在做 H5 的时候，前端通常会让 UI 给 750px 宽的设计图，而在开发的时候可以基于 iPhone X 的尺寸 375px * 812px 来写页面，这样一来的话，就可以用下面的 JS 依据当前页面的视口宽度自动计算出根元素 html 的基准 font-size 是多少。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">doc, win</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> docEl = doc.documentElement,</span><br><span class="line">        resizeEvt = <span class="string">&#x27;orientationchange&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span> ? <span class="string">&#x27;orientationchange&#x27;</span> : <span class="string">&#x27;resize&#x27;</span>,</span><br><span class="line">        psdWidth = <span class="number">750</span>,  <span class="comment">// 设计图宽度</span></span><br><span class="line">        recalc = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> clientWidth = docEl.clientWidth;</span><br><span class="line">            <span class="keyword">if</span> ( !clientWidth ) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">if</span> ( clientWidth &gt;= <span class="number">640</span> ) &#123;</span><br><span class="line">                docEl.style.fontSize = <span class="number">200</span> * ( <span class="number">640</span> / psdWidth ) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                docEl.style.fontSize = <span class="number">200</span> * ( clientWidth / psdWidth ) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( !doc.addEventListener ) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 绑定事件的时候最好配合防抖函数</span></span><br><span class="line">    win.addEventListener( resizeEvt, debounce(recalc, <span class="number">1000</span>), <span class="literal">false</span> );</span><br><span class="line">    doc.addEventListener( <span class="string">&#x27;DOMContentLoaded&#x27;</span>, recalc, <span class="literal">false</span> );</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, wait</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> timeout;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> context = <span class="built_in">this</span>;</span><br><span class="line">            <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                func.apply(context, args)</span><br><span class="line">            &#125;, wait);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="built_in">document</span>, <span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
+
+<p>比如当视口是 375px 的时候，经过计算 html 的 font-size 会是 100px，这样有什么好处呢？好处就是方便写样式，比如从设计图量出来的 header 高度是 50px 的，那我们写样式的时候就可以直接写：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">header</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0.5rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vw-vh"><a href="#vw-vh" class="headerlink" title="vw/vh"></a>vw/vh</h2><p>vw 和 vh 分别是相对于屏幕视口宽度和高度而言的长度单位：</p>
+<ul>
+<li>1vw = 视口宽度均分成 100 份中 1 份的长度；</li>
+<li>1vh = 视口高度均分成 100 份中 1 份的长度；</li>
+</ul>
+<p>在 JS 中 100vw = window.innerWidth，100vh = window.innerHeight。</p>
+]]></content>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AJAX</title>
     <url>/2021/06/08/AJAX/</url>
     <content><![CDATA[<h1 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h1><blockquote>
@@ -85,6 +137,65 @@
 ]]></content>
       <tags>
         <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS自定义属性</title>
+    <url>/2021/06/09/CSS%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7/</url>
+    <content><![CDATA[<h1 id="CSS自定义属性"><a href="#CSS自定义属性" class="headerlink" title="CSS自定义属性"></a>CSS自定义属性</h1><p>之前我们通常是在预处理器里才可以使用变量，而现在 CSS 里也支持了变量的用法。通过自定义属性就可以在想要使用的地方引用它。</p>
+<p>自定义属性也和普通属性一样具有级联性，申明在<code>:root</code>下的时候，在全文档范围内可用，而如果是在某个元素下申明自定义属性，则只能在它及它的子元素下才可以使用。<br>自定义属性必须通过 <code>--x</code> 的格式申明，比如：<code>--theme-color: red;</code> 使用自定义属性的时候，需要用 <code>var</code> 函数。比如：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    --theme-<span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">var</span>(--theme-color)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="全局变量与变量覆盖"><a href="#全局变量与变量覆盖" class="headerlink" title="全局变量与变量覆盖"></a>全局变量与变量覆盖</h2><p>在<code>:root</code>代码块里面声明的变量就是全局变量，并且局部变量会覆盖全局变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">:root&#123;</span><br><span class="line">    --bg-color: red;</span><br><span class="line">&#125;</span><br><span class="line">body&#123;</span><br><span class="line">    --bg-color: lightblue;</span><br><span class="line">    background-color: var(--bg-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后生效的是<code>--bg-color: lightblue</code>，<code>bg-color</code>变量的值也就变成了<code>lightblue</code></p>
+]]></content>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS格式化上下文</title>
+    <url>/2021/06/09/CS%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
+    <content><![CDATA[<h1 id="格式化上下文"><a href="#格式化上下文" class="headerlink" title="格式化上下文"></a>格式化上下文</h1><p>格式化上下文（Formatting Context）是 CSS2.1 规范中的一个概念，大概说的是页面中的一块渲染区域，规定了渲染区域内部的子元素是如何排版以及相互作用的。</p>
+<p>不同类型的盒子有不同格式化上下文，大概有这 4 类：</p>
+<ul>
+<li>BFC (Block Formatting Context) 块级格式化上下文；</li>
+<li>IFC (Inline Formatting Context) 行内格式化上下文；</li>
+<li>FFC (Flex Formatting Context) 弹性格式化上下文；</li>
+<li>GFC (Grid Formatting Context) 格栅格式化上下文；</li>
+</ul>
+<p>其中 BFC 和 IFC 在 CSS 中扮演着非常重要的角色，因为它们直接影响了网页布局，所以需要深入理解其原理。</p>
+<h1 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h1><p>块格式化上下文，它是一个独立的渲染区域，只有块级盒子参与，它规定了内部的块级盒子如何布局，并且与这个区域外部毫不相干。</p>
+<img src="https://i.loli.net/2021/06/09/8e65SWDhiEyBPRY.png" alt="image-20210609084131626"  />
+
+<h2 id="BFC渲染规则"><a href="#BFC渲染规则" class="headerlink" title="BFC渲染规则"></a>BFC渲染规则</h2><ul>
+<li>内部的盒子会在垂直方向，一个接一个地放置；</li>
+<li>盒子垂直方向的距离由 margin 决定，属于同一个 BFC 的两个相邻盒子的 margin 会发生重叠；</li>
+<li>每个元素的 margin 的左边，与包含块 border 的左边相接触(对于从左往右的格式化，否则相反)，即使存在浮动也是如此；</li>
+<li>BFC 的区域不会与 float 盒子重叠；</li>
+<li>BFC 就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
+<li>计算 BFC 的高度时，浮动元素也参与计算。</li>
+</ul>
+<h2 id="如何创建-BFC？"><a href="#如何创建-BFC？" class="headerlink" title="如何创建 BFC？"></a>如何创建 BFC？</h2><ul>
+<li>根元素：html</li>
+<li>非溢出的可见元素：overflow 不为 visible</li>
+<li>设置浮动：float 属性不为 none</li>
+<li>设置定位：position 为 absolute 或 fixed</li>
+<li>定义成块级的非块级元素：display: inline-block/table-cell/table-caption/flex/inline-flex/grid/inline-grid</li>
+</ul>
+<h2 id="BFC-应用场景"><a href="#BFC-应用场景" class="headerlink" title="BFC 应用场景"></a>BFC 应用场景</h2><h3 id="自适应两栏布局"><a href="#自适应两栏布局" class="headerlink" title="自适应两栏布局"></a>自适应两栏布局</h3><p>应用原理：BFC 的区域不会和浮动区域重叠，所以就可以把侧边栏固定宽度且左浮动，而对右侧内容触发 BFC，使得它的宽度自适应该行剩余宽度。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;layout&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;aside&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;msin&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.aside</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="comment">/* 触发BFC */</span></span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/06/09/ZpBYgWwMQot2qGu.png" alt="image-20210609084812587"></p>
+<h3 id="防止垂直margin合并"><a href="#防止垂直margin合并" class="headerlink" title="防止垂直margin合并"></a>防止垂直margin合并</h3><p>BFC 渲染原理之一：同一个 BFC 下的垂直 margin 会发生合并。所以如果让 2 个元素不在同一个 BFC 中即可阻止垂直 margin 合并。那如何让 2 个相邻的兄弟元素不在同一个 BFC 中呢？可以给其中一个元素外面包裹一层，然后触发其包裹层的 BFC，这样一来 2 个元素就不会在同一个 BFC 中了。</p>
+<img src="https://i.loli.net/2021/06/09/bCRP31Z8oF9j5AG.png" alt="image-20210609085131346" style="zoom:67%;" />
+]]></content>
+      <tags>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -200,6 +311,80 @@
 ]]></content>
       <tags>
         <tag>HTML5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>同步与异步</title>
+    <url>/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/</url>
+    <content><![CDATA[<h1 id="同步模式与异步模式"><a href="#同步模式与异步模式" class="headerlink" title="同步模式与异步模式"></a>同步模式与异步模式</h1><h2 id="同步模式"><a href="#同步模式" class="headerlink" title="同步模式"></a>同步模式</h2><ul>
+<li>同步模式指的是同一时间只能执行一条命令，后续的命令只能在上一条命令执行完才能被执行</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global start&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;bar task&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;foo task&#x27;</span>)</span><br><span class="line">    bar ()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
+<li>将所有代码在调用栈中<strong>整合为一个匿名函数</strong>，相当于把全部的代码放到一个匿名函数中去执行</li>
+<li>开始执行第一行代码<code>console.log(&#39;global start&#39;)</code>，将这行代码压入调用栈执行，执行过程中控制带打印出<code>global start</code>，执行结束弹出这行代码，然后执行下一行</li>
+<li>接下来是两个函数的声明，<strong>在JS中，不管是函数还是变量的声明都不会产生调用</strong>，执行继续往下</li>
+<li>执行到<code>foo()</code>，对函数的调用将会被压入调用栈，然后开始执行这个<code>foo()</code>函数</li>
+<li><code>foo()</code>函数开始先是打印了<code>console.log(&#39;foo task&#39;)</code>，打印完成之后执行调用<code>bar()</code>函数，<code>bar()</code>函数也会被放入调用栈</li>
+<li>执行完<code>bar()</code>函数中的<code>console.log(&#39;bar task&#39;)</code>后，<code>bar()</code>函数被抛出调用栈，此时<code>foo()</code>函数执行完毕，抛出调用栈</li>
+<li>最后执行<code>console.log(&#39;global end&#39;)</code></li>
+</ol>
+<h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3><ul>
+<li>同步模式一次只执行一条命令，如果其中一条命令执行的时间很长，<strong>那他后面的任务就会被延迟，这种延迟被称为阻塞</strong></li>
+</ul>
+<h2 id="异步模式"><a href="#异步模式" class="headerlink" title="异步模式"></a>异步模式</h2><ul>
+<li>不会等待这个任务结束才会执行下一个任务</li>
+<li>对于耗时任务，开启过后就立即往后执行下一个任务</li>
+<li>耗时任务的后续逻辑一般会通过回调函数的方式定义</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global begin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer1 invoke&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">1800</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer2</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer2 invoke&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;inner invoke&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
+<li>加载整体的代码，在调用栈中整合为一个匿名函数</li>
+<li>开始执行第一行代码，压入调用栈，在控制台中打印<code>global begin</code>，执行完被抛出</li>
+<li>将第一个<code>setTimeout()</code>调用压入调用栈，<code>setTimeout()</code>是一个异步调用，所以在<code>Web APIs</code>中开启一个1.8s的倒计时，然后窒执行下一个函数（开启计数器的时候，<code>timer1</code>的调用已经被完成，抛出调用栈）</li>
+<li>遇到<code>timer2</code>函数，先压入调用栈，然后开启计时器，调用完成抛出调用栈</li>
+<li>执行最后一行代码，并打印到控制台，然后清空调用栈</li>
+<li><code>timer2</code>的倒计时先完成，则把<code>timer2</code>放到消息队列，<code>timer1</code>的倒计时完成，则放到消息队列中的第二位</li>
+<li>一旦消息队列发生变化，则会被<code>event</code>监听到，则把消息队列中的单元放到调用栈中被执行</li>
+</ol>
+<p><img src="https://i.loli.net/2021/06/08/pyaUsborqMti4OY.png" alt="屏幕截图 2021-06-07 201146"></p>
+<h1 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h1><ul>
+<li><p>回调函数可以理解为一件你想要做的事情，你明确知道这件事情应该怎么做，但是你并不知道这件事情依赖的任务什么时候完成，所以最好的解决办法是将这件事情的步骤写入一个函数之中，交给任务的执行者，执行者是知道这件任务什么时候结束的，这样就可以在任务结束后执行这个函数</p>
+</li>
+<li><p>由调用者定义，由执行者执行的函数</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback()</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;这就是一个回调函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;调用者定义这个函数，执行者执行这个函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;其实就是调用者告诉执行者异步任务结束后应该做什么&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/06/08/7UVmIJoSavMB1r2.png" alt="屏幕截图 2021-06-07 201839"></p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><ul>
+<li>就是一个对象，用来表示一个异步任务结束后成功或是失败</li>
+</ul>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">100</span>)  <span class="comment">// 将结束状态修改为成功</span></span><br><span class="line">    <span class="comment">// reject(new Error(&#x27;promise rejected&#x27;))  // 失败</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;resolveed&#x27;</span>, value)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;rejected&#x27;</span>, error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>resolve()</code>和<code>reject()</code>两者只能有一个存在</li>
+</ul>
+<blockquote>
+<p>执行成功，返回<code>resolveed, 100</code></p>
+<p>执行失败，返回错误对象</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/06/08/eU9LcP74Kyi2bzB.png" alt="屏幕截图 2021-06-07 202452"></p>
+<h2 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, url)</span><br><span class="line">        xhr.responseType = <span class="string">&#x27;json&#x27;</span></span><br><span class="line">        xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">                resolve(<span class="built_in">this</span>.response)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="built_in">this</span>.statusText))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(<span class="string">&#x27;/api/users.json&#x27;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">20</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;jeck&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>promise对象的then()方法会返回一个全新的Promise对象</li>
+<li>后面的then方法就是在为上一个then返回的Promise注册回调</li>
+<li>前面then方法中回调函数的返回值会作为后面then方法回调的参数</li>
+<li>如果回调中返回的Promise，那后面then方法的回调会等待他的结束</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -445,6 +630,59 @@
       </tags>
   </entry>
   <entry>
+    <title>响应式开发</title>
+    <url>/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<p>#移动WEB开发</p>
+<h2 id="响应式开发"><a href="#响应式开发" class="headerlink" title="响应式开发"></a>响应式开发</h2><h3 id="什么是响应式网站"><a href="#什么是响应式网站" class="headerlink" title="什么是响应式网站"></a>什么是响应式网站</h3><ul>
+<li>就是在不同终端设备上和任何屏幕尺寸的设备上都可以完美展示网页<h3 id="响应式网站的概念"><a href="#响应式网站的概念" class="headerlink" title="响应式网站的概念"></a>响应式网站的概念</h3></li>
+<li>flexible | grid | layout 弹性网格布局</li>
+<li>flexible | image 弹性图片</li>
+<li>media queries 媒体查询<h3 id="响应式网站的优点"><a href="#响应式网站的优点" class="headerlink" title="响应式网站的优点"></a>响应式网站的优点</h3></li>
+<li>减少工作量<ul>
+<li>网站、设计、代码、内容都 只需要一份</li>
+<li>多出来的工作量只是JS脚本、CSS样式做一些改变</li>
+</ul>
+</li>
+<li>节省时间</li>
+<li>每个设备都能得到正确的显示</li>
+<li>搜索优化<h3 id="响应式网站的缺点"><a href="#响应式网站的缺点" class="headerlink" title="响应式网站的缺点"></a>响应式网站的缺点</h3></li>
+<li>会加载更多的样式和脚本资源</li>
+<li>设计比较难精确定位和控制</li>
+<li>老版本浏览器兼容不好<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
+<p>@mendia all and (min-width:800px) and (orientation:landscape){…}</p>
+</blockquote>
+</li>
+<li>and 两者都匹配</li>
+<li>or 任意条件匹配</li>
+<li>not 所有条件都不匹配</li>
+</ul>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>width:视口宽度</li>
+<li>height:视口高度</li>
+<li>device-width:设备屏幕的宽度</li>
+<li>device-height:设备屏幕的高度</li>
+<li>orientation:设备处于横向或纵向</li>
+<li>aspect-ratio:设备的宽高比(16:9 | 4:3 | …)</li>
+<li>color:每种颜色的位数(min-color:16位 | 8位)</li>
+<li>resolution:检测屏幕或打印机的分辨率</li>
+<li><strong>以上所有属性都可以加max-或min-</strong></li>
+</ul>
+<h3 id="viewport视口"><a href="#viewport视口" class="headerlink" title="viewport视口"></a>viewport视口</h3><ul>
+<li>布局视口(layout viewport):宽度不变的</li>
+<li>可视视口(visual viewport):显示布局视口的不同内容<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width&quot;</span> <span class="attr">minimum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">maximum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">user-scalable</span>=<span class="string">&quot;no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="px-em和rem的区别"><a href="#px-em和rem的区别" class="headerlink" title="px,em和rem的区别"></a>px,em和rem的区别</h2></li>
+<li>px相当于屏幕分辨率的一个单位，1px相当于一个像素，固定的单位</li>
+<li>em相对单位</li>
+<li>em的相对参照物为父元素的<code>font-size</code></li>
+<li>em具有继承的特点，如果父元素没有设置<code>font-size</code>就往上找</li>
+<li>默认值为1em = 16px</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>响应式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>变形，过渡和动画</title>
     <url>/2021/04/14/%E5%8F%98%E5%BD%A2%EF%BC%8C%E8%BF%87%E6%B8%A1%E5%92%8C%E5%8A%A8%E7%94%BB/</url>
     <content><![CDATA[<h1 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h1><h2 id="Transform-变形"><a href="#Transform-变形" class="headerlink" title="Transform(变形)"></a>Transform(变形)</h2><ul>
@@ -583,133 +821,6 @@
 ]]></content>
       <tags>
         <tag>CSS3</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>同步与异步</title>
-    <url>/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/</url>
-    <content><![CDATA[<h1 id="同步模式与异步模式"><a href="#同步模式与异步模式" class="headerlink" title="同步模式与异步模式"></a>同步模式与异步模式</h1><h2 id="同步模式"><a href="#同步模式" class="headerlink" title="同步模式"></a>同步模式</h2><ul>
-<li>同步模式指的是同一时间只能执行一条命令，后续的命令只能在上一条命令执行完才能被执行</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global start&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;bar task&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;foo task&#x27;</span>)</span><br><span class="line">    bar ()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
-<li>将所有代码在调用栈中<strong>整合为一个匿名函数</strong>，相当于把全部的代码放到一个匿名函数中去执行</li>
-<li>开始执行第一行代码<code>console.log(&#39;global start&#39;)</code>，将这行代码压入调用栈执行，执行过程中控制带打印出<code>global start</code>，执行结束弹出这行代码，然后执行下一行</li>
-<li>接下来是两个函数的声明，<strong>在JS中，不管是函数还是变量的声明都不会产生调用</strong>，执行继续往下</li>
-<li>执行到<code>foo()</code>，对函数的调用将会被压入调用栈，然后开始执行这个<code>foo()</code>函数</li>
-<li><code>foo()</code>函数开始先是打印了<code>console.log(&#39;foo task&#39;)</code>，打印完成之后执行调用<code>bar()</code>函数，<code>bar()</code>函数也会被放入调用栈</li>
-<li>执行完<code>bar()</code>函数中的<code>console.log(&#39;bar task&#39;)</code>后，<code>bar()</code>函数被抛出调用栈，此时<code>foo()</code>函数执行完毕，抛出调用栈</li>
-<li>最后执行<code>console.log(&#39;global end&#39;)</code></li>
-</ol>
-<h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3><ul>
-<li>同步模式一次只执行一条命令，如果其中一条命令执行的时间很长，<strong>那他后面的任务就会被延迟，这种延迟被称为阻塞</strong></li>
-</ul>
-<h2 id="异步模式"><a href="#异步模式" class="headerlink" title="异步模式"></a>异步模式</h2><ul>
-<li>不会等待这个任务结束才会执行下一个任务</li>
-<li>对于耗时任务，开启过后就立即往后执行下一个任务</li>
-<li>耗时任务的后续逻辑一般会通过回调函数的方式定义</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global begin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer1 invoke&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">1800</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer2</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer2 invoke&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;inner invoke&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
-<li>加载整体的代码，在调用栈中整合为一个匿名函数</li>
-<li>开始执行第一行代码，压入调用栈，在控制台中打印<code>global begin</code>，执行完被抛出</li>
-<li>将第一个<code>setTimeout()</code>调用压入调用栈，<code>setTimeout()</code>是一个异步调用，所以在<code>Web APIs</code>中开启一个1.8s的倒计时，然后窒执行下一个函数（开启计数器的时候，<code>timer1</code>的调用已经被完成，抛出调用栈）</li>
-<li>遇到<code>timer2</code>函数，先压入调用栈，然后开启计时器，调用完成抛出调用栈</li>
-<li>执行最后一行代码，并打印到控制台，然后清空调用栈</li>
-<li><code>timer2</code>的倒计时先完成，则把<code>timer2</code>放到消息队列，<code>timer1</code>的倒计时完成，则放到消息队列中的第二位</li>
-<li>一旦消息队列发生变化，则会被<code>event</code>监听到，则把消息队列中的单元放到调用栈中被执行</li>
-</ol>
-<p><img src="https://i.loli.net/2021/06/08/pyaUsborqMti4OY.png" alt="屏幕截图 2021-06-07 201146"></p>
-<h1 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h1><ul>
-<li><p>回调函数可以理解为一件你想要做的事情，你明确知道这件事情应该怎么做，但是你并不知道这件事情依赖的任务什么时候完成，所以最好的解决办法是将这件事情的步骤写入一个函数之中，交给任务的执行者，执行者是知道这件任务什么时候结束的，这样就可以在任务结束后执行这个函数</p>
-</li>
-<li><p>由调用者定义，由执行者执行的函数</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback()</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;这就是一个回调函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;调用者定义这个函数，执行者执行这个函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;其实就是调用者告诉执行者异步任务结束后应该做什么&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/06/08/7UVmIJoSavMB1r2.png" alt="屏幕截图 2021-06-07 201839"></p>
-<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><ul>
-<li>就是一个对象，用来表示一个异步任务结束后成功或是失败</li>
-</ul>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">100</span>)  <span class="comment">// 将结束状态修改为成功</span></span><br><span class="line">    <span class="comment">// reject(new Error(&#x27;promise rejected&#x27;))  // 失败</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;resolveed&#x27;</span>, value)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;rejected&#x27;</span>, error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>resolve()</code>和<code>reject()</code>两者只能有一个存在</li>
-</ul>
-<blockquote>
-<p>执行成功，返回<code>resolveed, 100</code></p>
-<p>执行失败，返回错误对象</p>
-</blockquote>
-<p><img src="https://i.loli.net/2021/06/08/eU9LcP74Kyi2bzB.png" alt="屏幕截图 2021-06-07 202452"></p>
-<h2 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, url)</span><br><span class="line">        xhr.responseType = <span class="string">&#x27;json&#x27;</span></span><br><span class="line">        xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">                resolve(<span class="built_in">this</span>.response)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="built_in">this</span>.statusText))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(<span class="string">&#x27;/api/users.json&#x27;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">20</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;jeck&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>promise对象的then()方法会返回一个全新的Promise对象</li>
-<li>后面的then方法就是在为上一个then返回的Promise注册回调</li>
-<li>前面then方法中回调函数的返回值会作为后面then方法回调的参数</li>
-<li>如果回调中返回的Promise，那后面then方法的回调会等待他的结束</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>响应式开发</title>
-    <url>/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</url>
-    <content><![CDATA[<p>#移动WEB开发</p>
-<h2 id="响应式开发"><a href="#响应式开发" class="headerlink" title="响应式开发"></a>响应式开发</h2><h3 id="什么是响应式网站"><a href="#什么是响应式网站" class="headerlink" title="什么是响应式网站"></a>什么是响应式网站</h3><ul>
-<li>就是在不同终端设备上和任何屏幕尺寸的设备上都可以完美展示网页<h3 id="响应式网站的概念"><a href="#响应式网站的概念" class="headerlink" title="响应式网站的概念"></a>响应式网站的概念</h3></li>
-<li>flexible | grid | layout 弹性网格布局</li>
-<li>flexible | image 弹性图片</li>
-<li>media queries 媒体查询<h3 id="响应式网站的优点"><a href="#响应式网站的优点" class="headerlink" title="响应式网站的优点"></a>响应式网站的优点</h3></li>
-<li>减少工作量<ul>
-<li>网站、设计、代码、内容都 只需要一份</li>
-<li>多出来的工作量只是JS脚本、CSS样式做一些改变</li>
-</ul>
-</li>
-<li>节省时间</li>
-<li>每个设备都能得到正确的显示</li>
-<li>搜索优化<h3 id="响应式网站的缺点"><a href="#响应式网站的缺点" class="headerlink" title="响应式网站的缺点"></a>响应式网站的缺点</h3></li>
-<li>会加载更多的样式和脚本资源</li>
-<li>设计比较难精确定位和控制</li>
-<li>老版本浏览器兼容不好<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
-<p>@mendia all and (min-width:800px) and (orientation:landscape){…}</p>
-</blockquote>
-</li>
-<li>and 两者都匹配</li>
-<li>or 任意条件匹配</li>
-<li>not 所有条件都不匹配</li>
-</ul>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
-<li>width:视口宽度</li>
-<li>height:视口高度</li>
-<li>device-width:设备屏幕的宽度</li>
-<li>device-height:设备屏幕的高度</li>
-<li>orientation:设备处于横向或纵向</li>
-<li>aspect-ratio:设备的宽高比(16:9 | 4:3 | …)</li>
-<li>color:每种颜色的位数(min-color:16位 | 8位)</li>
-<li>resolution:检测屏幕或打印机的分辨率</li>
-<li><strong>以上所有属性都可以加max-或min-</strong></li>
-</ul>
-<h3 id="viewport视口"><a href="#viewport视口" class="headerlink" title="viewport视口"></a>viewport视口</h3><ul>
-<li>布局视口(layout viewport):宽度不变的</li>
-<li>可视视口(visual viewport):显示布局视口的不同内容<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width&quot;</span> <span class="attr">minimum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">maximum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">user-scalable</span>=<span class="string">&quot;no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="px-em和rem的区别"><a href="#px-em和rem的区别" class="headerlink" title="px,em和rem的区别"></a>px,em和rem的区别</h2></li>
-<li>px相当于屏幕分辨率的一个单位，1px相当于一个像素，固定的单位</li>
-<li>em相对单位</li>
-<li>em的相对参照物为父元素的<code>font-size</code></li>
-<li>em具有继承的特点，如果父元素没有设置<code>font-size</code>就往上找</li>
-<li>默认值为1em = 16px</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>响应式</tag>
       </tags>
   </entry>
   <entry>
