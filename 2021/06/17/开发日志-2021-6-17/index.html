@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>#开发日志 2021/5/15 |  Aur0ra</title>
+      <title>开发日志 2021/6/17 |  Aur0ra</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -46,7 +46,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-开发日志-2021-5-15"
+  id="post-开发日志-2021-6-17"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -57,7 +57,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  #开发日志 2021/5/15
+  开发日志 2021/6/17
 </h1>
  
 
@@ -65,15 +65,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/06/15/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-5-15/" class="article-date">
-  <time datetime="2021-06-15T04:26:57.000Z" itemprop="datePublished">2021-06-15</time>
+      <a href="/2021/06/17/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-17/" class="article-date">
+  <time datetime="2021-06-17T12:38:18.000Z" itemprop="datePublished">2021-06-17</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">31</span>
+            <span class="post-count">497</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -97,13 +97,22 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="开发日志"><a href="#开发日志" class="headerlink" title="# 开发日志"></a># 开发日志</h1><h2 id="2021-5-15"><a href="#2021-5-15" class="headerlink" title="# 2021/5/15"></a># 2021/5/15</h2><ul>
-<li>设计了登录界面，首页界面，专业查询界面和用户信息界面</li>
+  <h1 id="2021-6-17"><a href="#2021-6-17" class="headerlink" title="# 2021/6/17"></a># 2021/6/17</h1><ul>
+<li>首页界面整体布局完成</li>
+<li>首页展示内容待确定</li>
+<li>引入动画库<code>vue-scroll-reveal: ^1.0.11</code></li>
+<li>添加渐入动画效果</li>
 </ul>
-<p><img src="https://i.loli.net/2021/06/16/PmNnsju8dQFrG1z.jpg" alt="登录界面设计稿（初稿）"></p>
-<p><img src="https://i.loli.net/2021/06/16/S58PYAi7Oja3VkL.jpg" alt="首页界面设计稿（初稿）"></p>
-<p><img src="https://i.loli.net/2021/06/16/Xl8RWDNc1K937Oh.jpg" alt="专业选择界面设计稿（初稿）"></p>
-<p><img src="https://i.loli.net/2021/06/16/lmJ7AfOiFvoSPpt.jpg" alt="用户信息界面设计稿（初稿）"></p>
+<p><img src="https://i.loli.net/2021/06/17/g8fDabjwq56U4PA.png" alt="1"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;div id=&quot;chart_line&quot; style=&quot;width: 700px;height: 500px;&quot;&gt;&lt;/div&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wel_header&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wel_title&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>高考<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h5</span>&gt;</span>志愿填报系统<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wel_icon&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card_main&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">class</span>=<span class="string">&quot;card_dashboard&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;chart_line&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width: 395px;height: 245px;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">class</span>=<span class="string">&quot;card_dashboard&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">class</span>=<span class="string">&quot;card_dashboard&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">class</span>=<span class="string">&quot;card_dashboard&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card_popularInstitutions&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>热门院校<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> echarts <span class="keyword">from</span> <span class="string">&#x27;echarts&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&#x27;Welcome&#x27;</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// value: new Date()</span></span><br><span class="line">      option: &#123;</span><br><span class="line">        title: &#123;</span><br><span class="line">          text: <span class="string">&#x27;高考录取率&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        xAxis: &#123;</span><br><span class="line">          type: <span class="string">&#x27;category&#x27;</span>,</span><br><span class="line">          data: [<span class="string">&#x27;2012&#x27;</span>, <span class="string">&#x27;2013&#x27;</span>, <span class="string">&#x27;2014&#x27;</span>, <span class="string">&#x27;2015&#x27;</span>, <span class="string">&#x27;2016&#x27;</span>, <span class="string">&#x27;2017&#x27;</span>, <span class="string">&#x27;2018&#x27;</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">        yAxis: &#123;</span><br><span class="line">          type: <span class="string">&#x27;value&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        series: [&#123;</span><br><span class="line">          data: [<span class="number">820</span>, <span class="number">932</span>, <span class="number">901</span>, <span class="number">934</span>, <span class="number">1290</span>, <span class="number">1330</span>, <span class="number">1320</span>],</span><br><span class="line">          type: <span class="string">&#x27;line&#x27;</span>,</span><br><span class="line">          smooth: <span class="literal">true</span></span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="comment">// eslint-disable-next-line camelcase</span></span><br><span class="line">    <span class="keyword">const</span> chart_line = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">&#x27;chart_line&#x27;</span>))</span><br><span class="line">    <span class="keyword">const</span> option = <span class="built_in">this</span>.option</span><br><span class="line">    option &amp;&amp; chart_line.setOption(option)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped lang=&quot;less&quot;&gt;</span><br><span class="line"><span class="selector-class">.wel_header</span> &#123;</span><br><span class="line">  <span class="selector-class">.wel_title</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="selector-tag">h1</span> &#123;</span><br><span class="line">      <span class="attribute">font-weight</span>: <span class="number">500</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#7189ba</span>;</span><br><span class="line">      <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">h5</span> &#123;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#435f98</span>;</span><br><span class="line">      <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card_main</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: row;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">45px</span>;</span><br><span class="line">  <span class="selector-class">.card_dashboard</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">395px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">245px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card_popularInstitutions</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="selector-class">.el-card</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="selector-tag">h1</span> &#123;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">40px</span>;</span><br><span class="line">      <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#3e58c6</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="待解决问题"><a href="#待解决问题" class="headerlink" title="待解决问题"></a><strong>待解决问题</strong></h2><ul>
+<li>首页展示的卡片太多，能否制作一个可复用组件展示内容，但是每个卡片内容不同，传入的数据难以处理，正在寻找解决方案</li>
+</ul>
  
       <!-- reward -->
       
@@ -168,7 +177,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/06/15/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-5-15/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/06/17/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-17/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -181,19 +190,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/06/16/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-5-16/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            #开发日志 2021/5/16
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/06/09/CSS%E5%80%BC%E5%92%8C%E5%8D%95%E4%BD%8D/" class="article-nav-link">
+      <a href="/2021/06/16/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-16/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">CSS值和单位</div>
+        <div class="article-nav-title">#开发日志 2021/6/16</div>
       </a>
     
   </nav>

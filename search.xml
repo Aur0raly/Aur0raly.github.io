@@ -1,58 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CSS值和单位</title>
-    <url>/2021/06/09/CSS%E5%80%BC%E5%92%8C%E5%8D%95%E4%BD%8D/</url>
-    <content><![CDATA[<h1 id="CSS-值和单位"><a href="#CSS-值和单位" class="headerlink" title="CSS 值和单位"></a>CSS 值和单位</h1><p>CSS 的声明是由属性和值组成的，而值的类型有许多种：</p>
-<ul>
-<li>数值：长度值 ，用于指定例如元素 width、border-width、font-size 等属性的值；</li>
-<li>百分比：可以用于指定尺寸或长度，例如取决于父容器的 width、height 或默认的 font-size；</li>
-<li>颜色：用于指定 background-color、color 等；</li>
-<li>坐标位置：以屏幕的左上角为坐标原点定位元素的位置，比如常见的 background-position、top、right、bottom 和 left 等属性；</li>
-<li>函数：用于指定资源路径或背景图片的渐变，比如 url()、linear-gradient() 等；</li>
-</ul>
-<h2 id="px"><a href="#px" class="headerlink" title="px"></a>px</h2><p>屏幕分辨率是指在屏幕的横纵方向上的像素点数量，比如分辨率 1920×1080 意味着水平方向含有 1920 个像素数，垂直方向含有 1080 个像素数。</p>
-<p><img src="https://i.loli.net/2021/06/09/JGaKMh5k2fjHNd9.png" alt="image-20210609085758957"></p>
-<p>而 px 表示的是 CSS 中的像素，在 CSS 中它是绝对的长度单位，也是最基础的单位，其他长度单位会自动被浏览器换算成 px。但是对于设备而言，它其实又是相对的长度单位，比如宽高都为 2px，在正常的屏幕下，其实就是 4 个像素点，而在设备像素比(devicePixelRatio) 为 2 的 Retina 屏幕下，它就有 16 个像素点。所以屏幕尺寸一致的情况下，屏幕分辨率越高，显示效果就越细腻。</p>
-<h3 id="设备像素"><a href="#设备像素" class="headerlink" title="设备像素"></a>设备像素</h3><blockquote>
-<p>设备屏幕的物理像素，表示的是屏幕的横纵有多少像素点；和屏幕分辨率是差不多的意思。</p>
-</blockquote>
-<h3 id="设备像素比"><a href="#设备像素比" class="headerlink" title="设备像素比"></a>设备像素比</h3><blockquote>
-<p>设备像素比表示 1 个 CSS 像素等于几个物理像素。</p>
-<p>计算公式：DPR = 物理像素数 / 逻辑像素数；</p>
-<p>在浏览器中可以通过 window.devicePixelRatio 来获取当前屏幕的 DPR。</p>
-</blockquote>
-<h2 id="em"><a href="#em" class="headerlink" title="em"></a>em</h2><p>em 是 CSS 中的相对长度单位中的一个。居然是相对的，那它到底是相对的谁呢？它有 2 层意思：</p>
-<ul>
-<li>在 font-size 中使用是相对于<strong>父元素</strong>的 font-size 大小，比如父元素 font-size: 16px，当给子元素指定 font-size: 2em 的时候，经过计算后它的字体大小会是 32px；</li>
-<li>在其他属性中使用是相对于自身的字体大小，如 width/height/padding/margin 等；</li>
-</ul>
-<p>我们都知道每个浏览器都会给 HTML 根元素 html 设置一个默认的 font-size，而这个值通常是 16px。这也就是为什么 1em = 16px 的原因所在了。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">font-size</span>: <span class="number">2em</span>; &#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123; <span class="attribute">font-size</span>: <span class="number">2em</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>对于如上一个结构的 HTML，由于根元素 html 的字体大小是 16px，所以 p 标签最终计算出来后的字体大小会是 16 * 2 * 2 = 64px</p>
-<h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p>rem(root em) 和 em 一样，也是一个相对长度单位，不过 rem 相对的是 HTML 的根元素 html。</p>
-<p>rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应网站或者 H5 中。</p>
-<p>比如在做 H5 的时候，前端通常会让 UI 给 750px 宽的设计图，而在开发的时候可以基于 iPhone X 的尺寸 375px * 812px 来写页面，这样一来的话，就可以用下面的 JS 依据当前页面的视口宽度自动计算出根元素 html 的基准 font-size 是多少。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">doc, win</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> docEl = doc.documentElement,</span><br><span class="line">        resizeEvt = <span class="string">&#x27;orientationchange&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span> ? <span class="string">&#x27;orientationchange&#x27;</span> : <span class="string">&#x27;resize&#x27;</span>,</span><br><span class="line">        psdWidth = <span class="number">750</span>,  <span class="comment">// 设计图宽度</span></span><br><span class="line">        recalc = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> clientWidth = docEl.clientWidth;</span><br><span class="line">            <span class="keyword">if</span> ( !clientWidth ) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">if</span> ( clientWidth &gt;= <span class="number">640</span> ) &#123;</span><br><span class="line">                docEl.style.fontSize = <span class="number">200</span> * ( <span class="number">640</span> / psdWidth ) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                docEl.style.fontSize = <span class="number">200</span> * ( clientWidth / psdWidth ) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( !doc.addEventListener ) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 绑定事件的时候最好配合防抖函数</span></span><br><span class="line">    win.addEventListener( resizeEvt, debounce(recalc, <span class="number">1000</span>), <span class="literal">false</span> );</span><br><span class="line">    doc.addEventListener( <span class="string">&#x27;DOMContentLoaded&#x27;</span>, recalc, <span class="literal">false</span> );</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, wait</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> timeout;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> context = <span class="built_in">this</span>;</span><br><span class="line">            <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                func.apply(context, args)</span><br><span class="line">            &#125;, wait);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="built_in">document</span>, <span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
-
-<p>比如当视口是 375px 的时候，经过计算 html 的 font-size 会是 100px，这样有什么好处呢？好处就是方便写样式，比如从设计图量出来的 header 高度是 50px 的，那我们写样式的时候就可以直接写：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">header</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0.5rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="vw-vh"><a href="#vw-vh" class="headerlink" title="vw/vh"></a>vw/vh</h2><p>vw 和 vh 分别是相对于屏幕视口宽度和高度而言的长度单位：</p>
-<ul>
-<li>1vw = 视口宽度均分成 100 份中 1 份的长度；</li>
-<li>1vh = 视口高度均分成 100 份中 1 份的长度；</li>
-</ul>
-<p>在 JS 中 100vw = window.innerWidth，100vh = window.innerHeight。</p>
-]]></content>
-      <tags>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AJAX</title>
     <url>/2021/06/08/AJAX/</url>
     <content><![CDATA[<h1 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h1><blockquote>
@@ -140,6 +88,58 @@
       </tags>
   </entry>
   <entry>
+    <title>CSS值和单位</title>
+    <url>/2021/06/09/CSS%E5%80%BC%E5%92%8C%E5%8D%95%E4%BD%8D/</url>
+    <content><![CDATA[<h1 id="CSS-值和单位"><a href="#CSS-值和单位" class="headerlink" title="CSS 值和单位"></a>CSS 值和单位</h1><p>CSS 的声明是由属性和值组成的，而值的类型有许多种：</p>
+<ul>
+<li>数值：长度值 ，用于指定例如元素 width、border-width、font-size 等属性的值；</li>
+<li>百分比：可以用于指定尺寸或长度，例如取决于父容器的 width、height 或默认的 font-size；</li>
+<li>颜色：用于指定 background-color、color 等；</li>
+<li>坐标位置：以屏幕的左上角为坐标原点定位元素的位置，比如常见的 background-position、top、right、bottom 和 left 等属性；</li>
+<li>函数：用于指定资源路径或背景图片的渐变，比如 url()、linear-gradient() 等；</li>
+</ul>
+<h2 id="px"><a href="#px" class="headerlink" title="px"></a>px</h2><p>屏幕分辨率是指在屏幕的横纵方向上的像素点数量，比如分辨率 1920×1080 意味着水平方向含有 1920 个像素数，垂直方向含有 1080 个像素数。</p>
+<p><img src="https://i.loli.net/2021/06/09/JGaKMh5k2fjHNd9.png" alt="image-20210609085758957"></p>
+<p>而 px 表示的是 CSS 中的像素，在 CSS 中它是绝对的长度单位，也是最基础的单位，其他长度单位会自动被浏览器换算成 px。但是对于设备而言，它其实又是相对的长度单位，比如宽高都为 2px，在正常的屏幕下，其实就是 4 个像素点，而在设备像素比(devicePixelRatio) 为 2 的 Retina 屏幕下，它就有 16 个像素点。所以屏幕尺寸一致的情况下，屏幕分辨率越高，显示效果就越细腻。</p>
+<h3 id="设备像素"><a href="#设备像素" class="headerlink" title="设备像素"></a>设备像素</h3><blockquote>
+<p>设备屏幕的物理像素，表示的是屏幕的横纵有多少像素点；和屏幕分辨率是差不多的意思。</p>
+</blockquote>
+<h3 id="设备像素比"><a href="#设备像素比" class="headerlink" title="设备像素比"></a>设备像素比</h3><blockquote>
+<p>设备像素比表示 1 个 CSS 像素等于几个物理像素。</p>
+<p>计算公式：DPR = 物理像素数 / 逻辑像素数；</p>
+<p>在浏览器中可以通过 window.devicePixelRatio 来获取当前屏幕的 DPR。</p>
+</blockquote>
+<h2 id="em"><a href="#em" class="headerlink" title="em"></a>em</h2><p>em 是 CSS 中的相对长度单位中的一个。居然是相对的，那它到底是相对的谁呢？它有 2 层意思：</p>
+<ul>
+<li>在 font-size 中使用是相对于<strong>父元素</strong>的 font-size 大小，比如父元素 font-size: 16px，当给子元素指定 font-size: 2em 的时候，经过计算后它的字体大小会是 32px；</li>
+<li>在其他属性中使用是相对于自身的字体大小，如 width/height/padding/margin 等；</li>
+</ul>
+<p>我们都知道每个浏览器都会给 HTML 根元素 html 设置一个默认的 font-size，而这个值通常是 16px。这也就是为什么 1em = 16px 的原因所在了。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">font-size</span>: <span class="number">2em</span>; &#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123; <span class="attribute">font-size</span>: <span class="number">2em</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于如上一个结构的 HTML，由于根元素 html 的字体大小是 16px，所以 p 标签最终计算出来后的字体大小会是 16 * 2 * 2 = 64px</p>
+<h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p>rem(root em) 和 em 一样，也是一个相对长度单位，不过 rem 相对的是 HTML 的根元素 html。</p>
+<p>rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应网站或者 H5 中。</p>
+<p>比如在做 H5 的时候，前端通常会让 UI 给 750px 宽的设计图，而在开发的时候可以基于 iPhone X 的尺寸 375px * 812px 来写页面，这样一来的话，就可以用下面的 JS 依据当前页面的视口宽度自动计算出根元素 html 的基准 font-size 是多少。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">doc, win</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> docEl = doc.documentElement,</span><br><span class="line">        resizeEvt = <span class="string">&#x27;orientationchange&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span> ? <span class="string">&#x27;orientationchange&#x27;</span> : <span class="string">&#x27;resize&#x27;</span>,</span><br><span class="line">        psdWidth = <span class="number">750</span>,  <span class="comment">// 设计图宽度</span></span><br><span class="line">        recalc = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> clientWidth = docEl.clientWidth;</span><br><span class="line">            <span class="keyword">if</span> ( !clientWidth ) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">if</span> ( clientWidth &gt;= <span class="number">640</span> ) &#123;</span><br><span class="line">                docEl.style.fontSize = <span class="number">200</span> * ( <span class="number">640</span> / psdWidth ) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                docEl.style.fontSize = <span class="number">200</span> * ( clientWidth / psdWidth ) + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( !doc.addEventListener ) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 绑定事件的时候最好配合防抖函数</span></span><br><span class="line">    win.addEventListener( resizeEvt, debounce(recalc, <span class="number">1000</span>), <span class="literal">false</span> );</span><br><span class="line">    doc.addEventListener( <span class="string">&#x27;DOMContentLoaded&#x27;</span>, recalc, <span class="literal">false</span> );</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, wait</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> timeout;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> context = <span class="built_in">this</span>;</span><br><span class="line">            <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timeout)</span><br><span class="line">            timeout = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                func.apply(context, args)</span><br><span class="line">            &#125;, wait);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="built_in">document</span>, <span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
+
+<p>比如当视口是 375px 的时候，经过计算 html 的 font-size 会是 100px，这样有什么好处呢？好处就是方便写样式，比如从设计图量出来的 header 高度是 50px 的，那我们写样式的时候就可以直接写：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">header</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0.5rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vw-vh"><a href="#vw-vh" class="headerlink" title="vw/vh"></a>vw/vh</h2><p>vw 和 vh 分别是相对于屏幕视口宽度和高度而言的长度单位：</p>
+<ul>
+<li>1vw = 视口宽度均分成 100 份中 1 份的长度；</li>
+<li>1vh = 视口高度均分成 100 份中 1 份的长度；</li>
+</ul>
+<p>在 JS 中 100vw = window.innerWidth，100vh = window.innerHeight。</p>
+]]></content>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS自定义属性</title>
     <url>/2021/06/09/CSS%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7/</url>
     <content><![CDATA[<h1 id="CSS自定义属性"><a href="#CSS自定义属性" class="headerlink" title="CSS自定义属性"></a>CSS自定义属性</h1><p>之前我们通常是在预处理器里才可以使用变量，而现在 CSS 里也支持了变量的用法。通过自定义属性就可以在想要使用的地方引用它。</p>
@@ -196,195 +196,6 @@
 ]]></content>
       <tags>
         <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>video和audio详解</title>
-    <url>/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持Video标签。</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>video</code>:定义一个视频</li>
-<li><code>source</code>:定义多种媒体资源，如video，audio</li>
-<li>只支持: .mp4后缀(.h264编码格式),和.webm后缀(专用web视频格式),以及.ogg后缀(音频文件)</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>Html5 Video 可以添加多个source源来进行兼容适配,这样,当第一个源读取出问题时会自动读取下一个源.<br>比如可以同时在前面加上.webm和.mp4源,这样一个出错时会自动读取另一个可用源(因为不同浏览器,支持的格式是不一样的)</li>
-</ul>
-<h3 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h3><p><img src="https://images2015.cnblogs.com/blog/406799/201606/406799-20160601115737352-1458849421.png" alt="浏览器兼容"></p>
-<h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
-<li><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>如果出现该属性，则视频在就绪后马上播放。</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
-</tr>
-<tr>
-<td>height</td>
-<td>px</td>
-<td>设置视频播放器的高度。</td>
-</tr>
-<tr>
-<td>width</td>
-<td>px</td>
-<td>设置视频的宽度</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
-</tr>
-<tr>
-<td>muted</td>
-<td>muted</td>
-<td>规定视频的音频输出应该被静音。</td>
-</tr>
-<tr>
-<td>poster</td>
-<td>URL</td>
-<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>preload</td>
-<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放的视频的 URL。</td>
-</tr>
-</tbody></table>
-<h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>autoplay</td>
-<td>autoplay</td>
-<td>如果出现该属性，则视频在就绪后马上播放。</td>
-</tr>
-<tr>
-<td>controls</td>
-<td>controls</td>
-<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>loop</td>
-<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
-</tr>
-<tr>
-<td>muted</td>
-<td>muted</td>
-<td>规定视频的音频输出应该被静音。</td>
-</tr>
-<tr>
-<td>preload</td>
-<td>preload</td>
-<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
-</tr>
-<tr>
-<td>src</td>
-<td>url</td>
-<td>要播放的视频的 URL。</td>
-</tr>
-</tbody></table>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>HTML5</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>同步与异步</title>
-    <url>/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/</url>
-    <content><![CDATA[<h1 id="同步模式与异步模式"><a href="#同步模式与异步模式" class="headerlink" title="同步模式与异步模式"></a>同步模式与异步模式</h1><h2 id="同步模式"><a href="#同步模式" class="headerlink" title="同步模式"></a>同步模式</h2><ul>
-<li>同步模式指的是同一时间只能执行一条命令，后续的命令只能在上一条命令执行完才能被执行</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global start&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;bar task&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;foo task&#x27;</span>)</span><br><span class="line">    bar ()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
-<li>将所有代码在调用栈中<strong>整合为一个匿名函数</strong>，相当于把全部的代码放到一个匿名函数中去执行</li>
-<li>开始执行第一行代码<code>console.log(&#39;global start&#39;)</code>，将这行代码压入调用栈执行，执行过程中控制带打印出<code>global start</code>，执行结束弹出这行代码，然后执行下一行</li>
-<li>接下来是两个函数的声明，<strong>在JS中，不管是函数还是变量的声明都不会产生调用</strong>，执行继续往下</li>
-<li>执行到<code>foo()</code>，对函数的调用将会被压入调用栈，然后开始执行这个<code>foo()</code>函数</li>
-<li><code>foo()</code>函数开始先是打印了<code>console.log(&#39;foo task&#39;)</code>，打印完成之后执行调用<code>bar()</code>函数，<code>bar()</code>函数也会被放入调用栈</li>
-<li>执行完<code>bar()</code>函数中的<code>console.log(&#39;bar task&#39;)</code>后，<code>bar()</code>函数被抛出调用栈，此时<code>foo()</code>函数执行完毕，抛出调用栈</li>
-<li>最后执行<code>console.log(&#39;global end&#39;)</code></li>
-</ol>
-<h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3><ul>
-<li>同步模式一次只执行一条命令，如果其中一条命令执行的时间很长，<strong>那他后面的任务就会被延迟，这种延迟被称为阻塞</strong></li>
-</ul>
-<h2 id="异步模式"><a href="#异步模式" class="headerlink" title="异步模式"></a>异步模式</h2><ul>
-<li>不会等待这个任务结束才会执行下一个任务</li>
-<li>对于耗时任务，开启过后就立即往后执行下一个任务</li>
-<li>耗时任务的后续逻辑一般会通过回调函数的方式定义</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global begin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer1 invoke&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">1800</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer2</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer2 invoke&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;inner invoke&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
-<li>加载整体的代码，在调用栈中整合为一个匿名函数</li>
-<li>开始执行第一行代码，压入调用栈，在控制台中打印<code>global begin</code>，执行完被抛出</li>
-<li>将第一个<code>setTimeout()</code>调用压入调用栈，<code>setTimeout()</code>是一个异步调用，所以在<code>Web APIs</code>中开启一个1.8s的倒计时，然后窒执行下一个函数（开启计数器的时候，<code>timer1</code>的调用已经被完成，抛出调用栈）</li>
-<li>遇到<code>timer2</code>函数，先压入调用栈，然后开启计时器，调用完成抛出调用栈</li>
-<li>执行最后一行代码，并打印到控制台，然后清空调用栈</li>
-<li><code>timer2</code>的倒计时先完成，则把<code>timer2</code>放到消息队列，<code>timer1</code>的倒计时完成，则放到消息队列中的第二位</li>
-<li>一旦消息队列发生变化，则会被<code>event</code>监听到，则把消息队列中的单元放到调用栈中被执行</li>
-</ol>
-<p><img src="https://i.loli.net/2021/06/08/pyaUsborqMti4OY.png" alt="屏幕截图 2021-06-07 201146"></p>
-<h1 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h1><ul>
-<li><p>回调函数可以理解为一件你想要做的事情，你明确知道这件事情应该怎么做，但是你并不知道这件事情依赖的任务什么时候完成，所以最好的解决办法是将这件事情的步骤写入一个函数之中，交给任务的执行者，执行者是知道这件任务什么时候结束的，这样就可以在任务结束后执行这个函数</p>
-</li>
-<li><p>由调用者定义，由执行者执行的函数</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback()</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;这就是一个回调函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;调用者定义这个函数，执行者执行这个函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;其实就是调用者告诉执行者异步任务结束后应该做什么&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/06/08/7UVmIJoSavMB1r2.png" alt="屏幕截图 2021-06-07 201839"></p>
-<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><ul>
-<li>就是一个对象，用来表示一个异步任务结束后成功或是失败</li>
-</ul>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">100</span>)  <span class="comment">// 将结束状态修改为成功</span></span><br><span class="line">    <span class="comment">// reject(new Error(&#x27;promise rejected&#x27;))  // 失败</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;resolveed&#x27;</span>, value)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;rejected&#x27;</span>, error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>resolve()</code>和<code>reject()</code>两者只能有一个存在</li>
-</ul>
-<blockquote>
-<p>执行成功，返回<code>resolveed, 100</code></p>
-<p>执行失败，返回错误对象</p>
-</blockquote>
-<p><img src="https://i.loli.net/2021/06/08/eU9LcP74Kyi2bzB.png" alt="屏幕截图 2021-06-07 202452"></p>
-<h2 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, url)</span><br><span class="line">        xhr.responseType = <span class="string">&#x27;json&#x27;</span></span><br><span class="line">        xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">                resolve(<span class="built_in">this</span>.response)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="built_in">this</span>.statusText))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(<span class="string">&#x27;/api/users.json&#x27;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">20</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;jeck&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>promise对象的then()方法会返回一个全新的Promise对象</li>
-<li>后面的then方法就是在为上一个then返回的Promise注册回调</li>
-<li>前面then方法中回调函数的返回值会作为后面then方法回调的参数</li>
-<li>如果回调中返回的Promise，那后面then方法的回调会等待他的结束</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -630,59 +441,6 @@
       </tags>
   </entry>
   <entry>
-    <title>响应式开发</title>
-    <url>/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</url>
-    <content><![CDATA[<p>#移动WEB开发</p>
-<h2 id="响应式开发"><a href="#响应式开发" class="headerlink" title="响应式开发"></a>响应式开发</h2><h3 id="什么是响应式网站"><a href="#什么是响应式网站" class="headerlink" title="什么是响应式网站"></a>什么是响应式网站</h3><ul>
-<li>就是在不同终端设备上和任何屏幕尺寸的设备上都可以完美展示网页<h3 id="响应式网站的概念"><a href="#响应式网站的概念" class="headerlink" title="响应式网站的概念"></a>响应式网站的概念</h3></li>
-<li>flexible | grid | layout 弹性网格布局</li>
-<li>flexible | image 弹性图片</li>
-<li>media queries 媒体查询<h3 id="响应式网站的优点"><a href="#响应式网站的优点" class="headerlink" title="响应式网站的优点"></a>响应式网站的优点</h3></li>
-<li>减少工作量<ul>
-<li>网站、设计、代码、内容都 只需要一份</li>
-<li>多出来的工作量只是JS脚本、CSS样式做一些改变</li>
-</ul>
-</li>
-<li>节省时间</li>
-<li>每个设备都能得到正确的显示</li>
-<li>搜索优化<h3 id="响应式网站的缺点"><a href="#响应式网站的缺点" class="headerlink" title="响应式网站的缺点"></a>响应式网站的缺点</h3></li>
-<li>会加载更多的样式和脚本资源</li>
-<li>设计比较难精确定位和控制</li>
-<li>老版本浏览器兼容不好<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
-<p>@mendia all and (min-width:800px) and (orientation:landscape){…}</p>
-</blockquote>
-</li>
-<li>and 两者都匹配</li>
-<li>or 任意条件匹配</li>
-<li>not 所有条件都不匹配</li>
-</ul>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
-<li>width:视口宽度</li>
-<li>height:视口高度</li>
-<li>device-width:设备屏幕的宽度</li>
-<li>device-height:设备屏幕的高度</li>
-<li>orientation:设备处于横向或纵向</li>
-<li>aspect-ratio:设备的宽高比(16:9 | 4:3 | …)</li>
-<li>color:每种颜色的位数(min-color:16位 | 8位)</li>
-<li>resolution:检测屏幕或打印机的分辨率</li>
-<li><strong>以上所有属性都可以加max-或min-</strong></li>
-</ul>
-<h3 id="viewport视口"><a href="#viewport视口" class="headerlink" title="viewport视口"></a>viewport视口</h3><ul>
-<li>布局视口(layout viewport):宽度不变的</li>
-<li>可视视口(visual viewport):显示布局视口的不同内容<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width&quot;</span> <span class="attr">minimum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">maximum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">user-scalable</span>=<span class="string">&quot;no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="px-em和rem的区别"><a href="#px-em和rem的区别" class="headerlink" title="px,em和rem的区别"></a>px,em和rem的区别</h2></li>
-<li>px相当于屏幕分辨率的一个单位，1px相当于一个像素，固定的单位</li>
-<li>em相对单位</li>
-<li>em的相对参照物为父元素的<code>font-size</code></li>
-<li>em具有继承的特点，如果父元素没有设置<code>font-size</code>就往上找</li>
-<li>默认值为1em = 16px</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>响应式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>变形，过渡和动画</title>
     <url>/2021/04/14/%E5%8F%98%E5%BD%A2%EF%BC%8C%E8%BF%87%E6%B8%A1%E5%92%8C%E5%8A%A8%E7%94%BB/</url>
     <content><![CDATA[<h1 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h1><h2 id="Transform-变形"><a href="#Transform-变形" class="headerlink" title="Transform(变形)"></a>Transform(变形)</h2><ul>
@@ -824,6 +582,268 @@
       </tags>
   </entry>
   <entry>
+    <title>video和audio详解</title>
+    <url>/2021/04/13/video%E5%92%8Caudio%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="video"><a href="#video" class="headerlink" title="video"></a>video</h2><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;movie.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持Video标签。</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>video</code>:定义一个视频</li>
+<li><code>source</code>:定义多种媒体资源，如video，audio</li>
+<li>只支持: .mp4后缀(.h264编码格式),和.webm后缀(专用web视频格式),以及.ogg后缀(音频文件)</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>Html5 Video 可以添加多个source源来进行兼容适配,这样,当第一个源读取出问题时会自动读取下一个源.<br>比如可以同时在前面加上.webm和.mp4源,这样一个出错时会自动读取另一个可用源(因为不同浏览器,支持的格式是不一样的)</li>
+</ul>
+<h3 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h3><p><img src="https://images2015.cnblogs.com/blog/406799/201606/406799-20160601115737352-1458849421.png" alt="浏览器兼容"></p>
+<h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><ul>
+<li><code>&lt;video&gt;</code> 标签定义视频，比如电影片段或其他视频流。<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>px</td>
+<td>设置视频播放器的高度。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>px</td>
+<td>设置视频的宽度</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>poster</td>
+<td>URL</td>
+<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+</tbody></table>
+<h2 id="audio"><a href="#audio" class="headerlink" title="audio"></a>audio</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+</tbody></table>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>HTML5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>响应式开发</title>
+    <url>/2021/04/21/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<p>#移动WEB开发</p>
+<h2 id="响应式开发"><a href="#响应式开发" class="headerlink" title="响应式开发"></a>响应式开发</h2><h3 id="什么是响应式网站"><a href="#什么是响应式网站" class="headerlink" title="什么是响应式网站"></a>什么是响应式网站</h3><ul>
+<li>就是在不同终端设备上和任何屏幕尺寸的设备上都可以完美展示网页<h3 id="响应式网站的概念"><a href="#响应式网站的概念" class="headerlink" title="响应式网站的概念"></a>响应式网站的概念</h3></li>
+<li>flexible | grid | layout 弹性网格布局</li>
+<li>flexible | image 弹性图片</li>
+<li>media queries 媒体查询<h3 id="响应式网站的优点"><a href="#响应式网站的优点" class="headerlink" title="响应式网站的优点"></a>响应式网站的优点</h3></li>
+<li>减少工作量<ul>
+<li>网站、设计、代码、内容都 只需要一份</li>
+<li>多出来的工作量只是JS脚本、CSS样式做一些改变</li>
+</ul>
+</li>
+<li>节省时间</li>
+<li>每个设备都能得到正确的显示</li>
+<li>搜索优化<h3 id="响应式网站的缺点"><a href="#响应式网站的缺点" class="headerlink" title="响应式网站的缺点"></a>响应式网站的缺点</h3></li>
+<li>会加载更多的样式和脚本资源</li>
+<li>设计比较难精确定位和控制</li>
+<li>老版本浏览器兼容不好<h2 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
+<p>@mendia all and (min-width:800px) and (orientation:landscape){…}</p>
+</blockquote>
+</li>
+<li>and 两者都匹配</li>
+<li>or 任意条件匹配</li>
+<li>not 所有条件都不匹配</li>
+</ul>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>width:视口宽度</li>
+<li>height:视口高度</li>
+<li>device-width:设备屏幕的宽度</li>
+<li>device-height:设备屏幕的高度</li>
+<li>orientation:设备处于横向或纵向</li>
+<li>aspect-ratio:设备的宽高比(16:9 | 4:3 | …)</li>
+<li>color:每种颜色的位数(min-color:16位 | 8位)</li>
+<li>resolution:检测屏幕或打印机的分辨率</li>
+<li><strong>以上所有属性都可以加max-或min-</strong></li>
+</ul>
+<h3 id="viewport视口"><a href="#viewport视口" class="headerlink" title="viewport视口"></a>viewport视口</h3><ul>
+<li>布局视口(layout viewport):宽度不变的</li>
+<li>可视视口(visual viewport):显示布局视口的不同内容<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width&quot;</span> <span class="attr">minimum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">maximum-scale</span>=<span class="string">&quot;1.0&quot;</span> <span class="attr">user-scalable</span>=<span class="string">&quot;no&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="px-em和rem的区别"><a href="#px-em和rem的区别" class="headerlink" title="px,em和rem的区别"></a>px,em和rem的区别</h2></li>
+<li>px相当于屏幕分辨率的一个单位，1px相当于一个像素，固定的单位</li>
+<li>em相对单位</li>
+<li>em的相对参照物为父元素的<code>font-size</code></li>
+<li>em具有继承的特点，如果父元素没有设置<code>font-size</code>就往上找</li>
+<li>默认值为1em = 16px</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>响应式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>同步与异步</title>
+    <url>/2021/06/08/%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5/</url>
+    <content><![CDATA[<h1 id="同步模式与异步模式"><a href="#同步模式与异步模式" class="headerlink" title="同步模式与异步模式"></a>同步模式与异步模式</h1><h2 id="同步模式"><a href="#同步模式" class="headerlink" title="同步模式"></a>同步模式</h2><ul>
+<li>同步模式指的是同一时间只能执行一条命令，后续的命令只能在上一条命令执行完才能被执行</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global start&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;bar task&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;foo task&#x27;</span>)</span><br><span class="line">    bar ()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
+<li>将所有代码在调用栈中<strong>整合为一个匿名函数</strong>，相当于把全部的代码放到一个匿名函数中去执行</li>
+<li>开始执行第一行代码<code>console.log(&#39;global start&#39;)</code>，将这行代码压入调用栈执行，执行过程中控制带打印出<code>global start</code>，执行结束弹出这行代码，然后执行下一行</li>
+<li>接下来是两个函数的声明，<strong>在JS中，不管是函数还是变量的声明都不会产生调用</strong>，执行继续往下</li>
+<li>执行到<code>foo()</code>，对函数的调用将会被压入调用栈，然后开始执行这个<code>foo()</code>函数</li>
+<li><code>foo()</code>函数开始先是打印了<code>console.log(&#39;foo task&#39;)</code>，打印完成之后执行调用<code>bar()</code>函数，<code>bar()</code>函数也会被放入调用栈</li>
+<li>执行完<code>bar()</code>函数中的<code>console.log(&#39;bar task&#39;)</code>后，<code>bar()</code>函数被抛出调用栈，此时<code>foo()</code>函数执行完毕，抛出调用栈</li>
+<li>最后执行<code>console.log(&#39;global end&#39;)</code></li>
+</ol>
+<h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3><ul>
+<li>同步模式一次只执行一条命令，如果其中一条命令执行的时间很长，<strong>那他后面的任务就会被延迟，这种延迟被称为阻塞</strong></li>
+</ul>
+<h2 id="异步模式"><a href="#异步模式" class="headerlink" title="异步模式"></a>异步模式</h2><ul>
+<li>不会等待这个任务结束才会执行下一个任务</li>
+<li>对于耗时任务，开启过后就立即往后执行下一个任务</li>
+<li>耗时任务的后续逻辑一般会通过回调函数的方式定义</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global begin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer1 invoke&#x27;</span>)</span><br><span class="line">&#125;, <span class="number">1800</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">timer2</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;timer2 invoke&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> <span class="title">inner</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;inner invoke&#x27;</span>)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;global end&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h3><ol>
+<li>加载整体的代码，在调用栈中整合为一个匿名函数</li>
+<li>开始执行第一行代码，压入调用栈，在控制台中打印<code>global begin</code>，执行完被抛出</li>
+<li>将第一个<code>setTimeout()</code>调用压入调用栈，<code>setTimeout()</code>是一个异步调用，所以在<code>Web APIs</code>中开启一个1.8s的倒计时，然后窒执行下一个函数（开启计数器的时候，<code>timer1</code>的调用已经被完成，抛出调用栈）</li>
+<li>遇到<code>timer2</code>函数，先压入调用栈，然后开启计时器，调用完成抛出调用栈</li>
+<li>执行最后一行代码，并打印到控制台，然后清空调用栈</li>
+<li><code>timer2</code>的倒计时先完成，则把<code>timer2</code>放到消息队列，<code>timer1</code>的倒计时完成，则放到消息队列中的第二位</li>
+<li>一旦消息队列发生变化，则会被<code>event</code>监听到，则把消息队列中的单元放到调用栈中被执行</li>
+</ol>
+<p><img src="https://i.loli.net/2021/06/08/pyaUsborqMti4OY.png" alt="屏幕截图 2021-06-07 201146"></p>
+<h1 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h1><ul>
+<li><p>回调函数可以理解为一件你想要做的事情，你明确知道这件事情应该怎么做，但是你并不知道这件事情依赖的任务什么时候完成，所以最好的解决办法是将这件事情的步骤写入一个函数之中，交给任务的执行者，执行者是知道这件任务什么时候结束的，这样就可以在任务结束后执行这个函数</p>
+</li>
+<li><p>由调用者定义，由执行者执行的函数</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback()</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;这就是一个回调函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;调用者定义这个函数，执行者执行这个函数&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;其实就是调用者告诉执行者异步任务结束后应该做什么&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/06/08/7UVmIJoSavMB1r2.png" alt="屏幕截图 2021-06-07 201839"></p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><ul>
+<li>就是一个对象，用来表示一个异步任务结束后成功或是失败</li>
+</ul>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve(<span class="number">100</span>)  <span class="comment">// 将结束状态修改为成功</span></span><br><span class="line">    <span class="comment">// reject(new Error(&#x27;promise rejected&#x27;))  // 失败</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;resolveed&#x27;</span>, value)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;rejected&#x27;</span>, error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>resolve()</code>和<code>reject()</code>两者只能有一个存在</li>
+</ul>
+<blockquote>
+<p>执行成功，返回<code>resolveed, 100</code></p>
+<p>执行失败，返回错误对象</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/06/08/eU9LcP74Kyi2bzB.png" alt="屏幕截图 2021-06-07 202452"></p>
+<h2 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, url)</span><br><span class="line">        xhr.responseType = <span class="string">&#x27;json&#x27;</span></span><br><span class="line">        xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">                resolve(<span class="built_in">this</span>.response)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="built_in">this</span>.statusText))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ajax(<span class="string">&#x27;/api/users.json&#x27;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">20</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;jeck&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;age&quot;</span>: <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>promise对象的then()方法会返回一个全新的Promise对象</li>
+<li>后面的then方法就是在为上一个then返回的Promise注册回调</li>
+<li>前面then方法中回调函数的返回值会作为后面then方法回调的参数</li>
+<li>如果回调中返回的Promise，那后面then方法的回调会等待他的结束</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开发日志 2021/6/14</title>
+    <url>/2021/06/14/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-14/</url>
+    <content><![CDATA[<h1 id="2021-6-14"><a href="#2021-6-14" class="headerlink" title="# 2021/6/14"></a># 2021/6/14</h1><h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><ul>
+<li>axios</li>
+<li>vue</li>
+<li>vue-router</li>
+<li>vue-cli</li>
+<li>element-ui</li>
+<li>eslint</li>
+<li>less</li>
+<li>vue-scroll-reveal</li>
+</ul>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">高考志愿填报系统</span><br><span class="line">├── public  &#x2F;&#x2F; 静态文件</span><br><span class="line">├── src  &#x2F;&#x2F; 主文件</span><br><span class="line">│   ├── assets  &#x2F;&#x2F; 资源</span><br><span class="line">│   │   ├── css  &#x2F;&#x2F; CSS样式</span><br><span class="line">│   │   ├── icon  &#x2F;&#x2F; 图标</span><br><span class="line">│   │   ├── images  &#x2F;&#x2F; 图片</span><br><span class="line">│   │   └── logo.png  &#x2F;&#x2F; LOGO</span><br><span class="line">│   ├── components  &#x2F;&#x2F; 组件</span><br><span class="line">│   │   ├── Home.vue  &#x2F;&#x2F; Home组件</span><br><span class="line">│   │   ├── Login.vue  &#x2F;&#x2F; Login组件</span><br><span class="line">│   │   └── Welcome.vue  &#x2F;&#x2F; Welcome组件</span><br><span class="line">│   ├── plugins  &#x2F;&#x2F; 配置</span><br><span class="line">│   │   └── element.js  &#x2F;&#x2F; element配置</span><br><span class="line">│   ├── App.vue  &#x2F;&#x2F; 主程序</span><br><span class="line">│   ├── main.js  &#x2F;&#x2F; 主入口</span><br><span class="line">|   └── router.js  &#x2F;&#x2F; 路由</span><br><span class="line">├── README.md</span><br><span class="line">├── package-lock.json</span><br><span class="line">├── package.json</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      <tags>
+        <tag>开发日志</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>属性选择器</title>
     <url>/2021/04/15/%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8/</url>
     <content><![CDATA[<h1 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h1><h2 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h2><h3 id="E-attr-quot-val-quot"><a href="#E-attr-quot-val-quot" class="headerlink" title="E[attr ~=&quot;val&quot;]"></a><code>E[attr ~=&quot;val&quot;]</code></h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-attr">[class = <span class="string">&quot;a&quot;</span>]</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: red;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-tag">p</span><span class="selector-attr">[class ~= <span class="string">&quot;a&quot;</span>]</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="attribute">background</span>: skyblue;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;a&quot;</span>&gt;</span>第一个 div 元素。<span class="tag">&lt;/<span class="name">div</span>&gt;</span>  //改变颜色</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;aa&quot;</span>&gt;</span>第二个 div 元素。<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;a b&quot;</span>&gt;</span>第三个 div 元素。<span class="tag">&lt;/<span class="name">div</span>&gt;</span>  //改变颜色</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;c a&quot;</span>&gt;</span>第四个 div 元素。<span class="tag">&lt;/<span class="name">div</span>&gt;</span>  //改变颜色</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;a&quot;</span>&gt;</span>这是段落中的文本。<span class="tag">&lt;/<span class="name">p</span>&gt;</span>  //改变颜色</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;aa&quot;</span>&gt;</span>这是段落中的文本。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;a b&quot;</span>&gt;</span>这是段落中的文本。<span class="tag">&lt;/<span class="name">p</span>&gt;</span>  //改变颜色</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;c a&quot;</span>&gt;</span>这是段落中的文本。<span class="tag">&lt;/<span class="name">p</span>&gt;</span>  //改变颜色</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -841,52 +861,60 @@
       </tags>
   </entry>
   <entry>
-    <title>语义化标签</title>
-    <url>/2021/04/10/%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE/</url>
-    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="语义化标签"><a href="#语义化标签" class="headerlink" title="语义化标签"></a>语义化标签</h2><h3 id="HTML5新增的语义化标签有"><a href="#HTML5新增的语义化标签有" class="headerlink" title="HTML5新增的语义化标签有"></a>HTML5新增的语义化标签有</h3><ul>
-<li><code>&lt;article&gt;</code>,<code>&lt;section&gt;</code>,<code>&lt;aside&gt;</code>,<code>&lt;header&gt;</code>,<code>&lt;footer&gt;</code>,<code>&lt;time&gt;</code>等<br><img src="https://img-blog.csdn.net/20180626164405788?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4MTI4MTc5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="区域"><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3></li>
-<li>为了在没用CSS的情况下，页面也能更好的呈现出内容结构，代码结构</li>
-<li>比div标签有更加丰富的含义，方便开发和维护</li>
-<li>方便搜索引擎识别页面结构，有利于SEO</li>
-<li>方便其他设备解析</li>
-<li>有利于合作，遵守W3C标准<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3></li>
-<li>尽可能少使用无语义的标签如div和span</li>
-<li>在语义不明显时，既可以使用div或者p时，尽量用p，因为p在默认情况下有上下间距，对兼容特殊终端有利</li>
-<li>不要使用纯样式标签，如p,font,u等，改用CSS样式</li>
-<li>需要强调的文本，可以包含在strong或者em标签中</li>
-<li>使用表格时，标题要用caption，表头用thead，主体部分用tbody包围，尾部用tfoot包围。表头和一般单元格要区分开，表头用th，单元格用td</li>
-<li>表单域要用fieldset标签包起来，并用legend标签说明表单的用途</li>
-<li>每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性<h2 id="header与hgroup"><a href="#header与hgroup" class="headerlink" title="header与hgroup"></a><code>header</code>与<code>hgroup</code></h2></li>
-<li>放在页面或布局的顶部，一般放置导航栏或标题，如：  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>**信息科技有限公司<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>一个文档中可以包含一对或者一对以上的<code>&lt;header&gt;</code>标签。</li>
-<li>标签的位置是次要的，不一定非要显示在页面的上方，<br>我们可以为任何需要的区块标签添加<code>&lt;header&gt;</code>元素，<br>例如下面将要讲解的<code>&lt;article&gt;</code>、<code>&lt;section&gt;</code>等标签。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hgroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>这是一篇介绍HTML 5语义化标签和更简洁的结构<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>HTML 5<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hgroup</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>如果有多个连续的h1~h6标签则用hgroup标签</li>
-<li>如果有连续多个标题和其他文章数据，h1-h6标签就用hgroup包住，<br>和其他文章元数据一起放入header标签<h2 id="nav标签"><a href="#nav标签" class="headerlink" title="nav标签"></a><code>nav</code>标签</h2></li>
-<li>表示页面的导航，可以在<code>header</code>中使用，还可以显示在侧边栏中，一个页面之中有多个<code>nav</code>标签</li>
-<li>为了方便搜索引擎解析，最好将多个主要的链接放在<code>nav</code>中<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">h1</span>&gt;</span>**信息科技有限公司<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;example.html&quot;</span>&gt;</span>客户案例<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;service_one.html&quot;</span>&gt;</span>技术服务<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>          </span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;aboutus_one.html&quot;</span>&gt;</span>关于我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;connection.html&quot;</span>&gt;</span>联系我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="aside标签"><a href="#aside标签" class="headerlink" title="aside标签"></a><code>aside</code>标签</h2></li>
-<li>所包含的内容不是页面的主要内容、具有独立性，是对页面的补充。</li>
-<li><code>&lt;aside&gt;</code>一般使用在页面、文章的侧边栏、广告、友情链接等区域。<h2 id="footer标签"><a href="#footer标签" class="headerlink" title="footer标签"></a><code>footer</code>标签</h2></li>
-<li>一般被放置在页面或者页面中某个区块的底部，包含版权信息、联系方式等信息。</li>
-<li>一个页面也可以有多个footer<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">small</span>&gt;</span></span><br><span class="line">        版权所有 © 2016-2017 **信息科技有限公司</span><br><span class="line">    <span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="article标签"><a href="#article标签" class="headerlink" title="article标签"></a><code>article</code>标签</h2></li>
-<li><code>&lt;article&gt;</code>元素应该使用在相对比较独立、完整的的内容区块，</li>
-<li>所以我们可以在一篇博客、一个论坛帖子、一篇新闻报道或者一个用户评论中使用<code>&lt;article&gt;</code>元素。</li>
-<li><code>article</code>可以互相嵌套。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">h1</span>&gt;</span>HTML5学习之语义化标签<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>....正文.....<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">footer</span>&gt;</span>版权所有*伪版必究<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="section标签"><a href="#section标签" class="headerlink" title="section标签"></a>section标签</h2></li>
-<li>一组或一节内容<h3 id="lt-div-gt-lt-sction-gt-和article标签的比较"><a href="#lt-div-gt-lt-sction-gt-和article标签的比较" class="headerlink" title="&lt;div&gt;,&lt;sction&gt;和article标签的比较"></a><code>&lt;div&gt;</code>,<code>&lt;sction&gt;</code>和<code>article</code>标签的比较</h3></li>
-<li>div:应用广泛，一个区域</li>
-<li>section:包含的内容是一个明确的主题，通常有标题区域</li>
-<li>article:如果我们的页面中需要一个单独的模块来实现一个单独的功能，就用<code>&lt;article&gt;</code>，<br>其他的时候都用<code>&lt;section&gt;</code><h2 id="time标签"><a href="#time标签" class="headerlink" title="time标签"></a><code>time</code>标签</h2></li>
-<li>可以带格式的时间标签<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2021-4-17&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="mark标签"><a href="#mark标签" class="headerlink" title="mark标签"></a><code>mark</code>标签</h2></li>
-<li>高亮显示<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mark</span>&gt;</span>这是一个mark标签<span class="tag">&lt;/<span class="name">mark</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="address标签"><a href="#address标签" class="headerlink" title="address标签"></a><code>address</code>标签</h2></li>
-<li>address代表区块容器，必须是作为联系信息出现，邮编地址、邮件地址等等,一般出现在footer。</li>
+    <title>#开发日志 2021/6/15</title>
+    <url>/2021/06/15/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-15/</url>
+    <content><![CDATA[<h1 id="开发日志"><a href="#开发日志" class="headerlink" title="# 开发日志"></a># 开发日志</h1><h2 id="2021-5-15"><a href="#2021-5-15" class="headerlink" title="# 2021/5/15"></a># 2021/5/15</h2><ul>
+<li>设计了登录界面，首页界面，专业查询界面和用户信息界面</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/16/PmNnsju8dQFrG1z.jpg" alt="登录界面设计稿（初稿）"></p>
+<p><img src="https://i.loli.net/2021/06/16/S58PYAi7Oja3VkL.jpg" alt="首页界面设计稿（初稿）"></p>
+<p><img src="https://i.loli.net/2021/06/16/Xl8RWDNc1K937Oh.jpg" alt="专业选择界面设计稿（初稿）"></p>
+<p><img src="https://i.loli.net/2021/06/16/lmJ7AfOiFvoSPpt.jpg" alt="用户信息界面设计稿（初稿）"></p>
+]]></content>
+      <tags>
+        <tag>开发日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>#开发日志 2021/6/16</title>
+    <url>/2021/06/16/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-16/</url>
+    <content><![CDATA[<h1 id="开发日志"><a href="#开发日志" class="headerlink" title="# 开发日志"></a># 开发日志</h1><h2 id="2021-5-16"><a href="#2021-5-16" class="headerlink" title="# 2021/5/16"></a># 2021/5/16</h2><ul>
+<li>实现了登录界面的界面绘制</li>
+<li>实现了用户名和密码的验证</li>
+<li>实现了路由守卫控制跳转验证</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login_container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login_box&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &amp;lt;!&amp;ndash;头像区域&amp;ndash;&amp;gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;div class=&quot;avatar_box&quot;&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--          &lt;img src=&quot;../assets/images/avatar.svg&quot; alt=&quot;&quot;&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;/div&gt;--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login_text&quot;</span>&gt;</span></span><br><span class="line">          欢迎登录</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--表单区域--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-form</span> <span class="attr">:model</span>=<span class="string">&quot;from&quot;</span> <span class="attr">:rules</span>=<span class="string">&quot;loginFormRules&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;loginFormRef&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form_login&quot;</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--账号--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">prop</span>=<span class="string">&quot;username&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-bottom: 50px&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont icon-username&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;from.username&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入账号&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--密码--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">prop</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont icon-password&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;from.password&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--登录--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">class</span>=<span class="string">&quot;btns&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">round</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;login&quot;</span> <span class="attr">class</span>=<span class="string">&quot;login_button&quot;</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-form</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style scoped=&quot;scoped&quot; lang=&quot;less&quot;&gt;</span><br><span class="line"><span class="selector-class">.login_container</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;~@/assets/images/bgimg.jpg&#x27;</span>);</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">  <span class="attribute">background-size</span>: cover;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">align-content</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.login</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&quot;~@/assets/images/login_box.png&quot;</span>);</span><br><span class="line">  <span class="attribute">background-size</span>: cover;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">1314px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">660px</span>;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-around;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.login_text</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">55px</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#3e58c6</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">330px</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">85px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">4px</span> solid <span class="number">#6386ff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.login_pic</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">15px</span>, <span class="number">0px</span>);</span><br><span class="line">  <span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.login_box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">450px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">450px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">65%</span>, <span class="number">0%</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btns</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-end;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="selector-class">.login_button</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#3e58c6</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">65px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">230px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">115px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">25px</span>;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">border</span>: unset;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.form_login</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">10px</span> <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  /deep/ <span class="selector-class">.el-form-item__content</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="selector-class">.icon-username</span>, <span class="selector-class">.icon-password</span> &#123;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">40px</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#3e58c6</span>;</span><br><span class="line">      <span class="attribute">margin-right</span>: <span class="number">15px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.el-input</span> &#123;</span><br><span class="line">    /deep/ <span class="selector-class">.el-input__inner</span> &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: <span class="number">#eeeff3</span>;</span><br><span class="line">      <span class="attribute">width</span>: <span class="number">390px</span>;</span><br><span class="line">      <span class="attribute">height</span>: <span class="number">60px</span>;</span><br><span class="line">      <span class="attribute">border-radius</span>: <span class="number">30px</span>;</span><br><span class="line">      <span class="attribute">border</span>: unset;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&#x27;Login&#x27;</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="keyword">from</span>: &#123;</span><br><span class="line">        username: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        password: <span class="string">&#x27;&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      loginFormRules: &#123;</span><br><span class="line">        username: [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录名&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">min</span>: <span class="number">3</span>, <span class="attr">max</span>: <span class="number">10</span>, <span class="attr">message</span>: <span class="string">&#x27;长度在 3 到 5 个字符&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ],</span><br><span class="line">        password: [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录密码&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">min</span>: <span class="number">3</span>, <span class="attr">max</span>: <span class="number">18</span>, <span class="attr">message</span>: <span class="string">&#x27;长度在 3 到 6 个字符&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// resetLoginForm () &#123;</span></span><br><span class="line">    <span class="comment">//   // console.log(this);</span></span><br><span class="line">    <span class="comment">//   this.$refs.loginFormRef.resetFields()</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    login () &#123;</span><br><span class="line">      <span class="built_in">this</span>.$refs.loginFormRef.validate(<span class="keyword">async</span> valid =&gt; &#123;</span><br><span class="line">        <span class="comment">// console.log(valid)</span></span><br><span class="line">        <span class="keyword">if</span> (!valid) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> <span class="built_in">this</span>.$http.post(<span class="string">&#x27;login&#x27;</span>, <span class="built_in">this</span>.from)</span><br><span class="line">        <span class="built_in">console</span>.log(res)</span><br><span class="line">        <span class="keyword">if</span> (res.meta.status !== <span class="number">200</span>) <span class="keyword">return</span> <span class="built_in">this</span>.$message.error(<span class="string">&#x27;账户或密码错误，登录失败&#x27;</span>)</span><br><span class="line">        <span class="built_in">this</span>.$message.success(<span class="string">&#x27;登录成功&#x27;</span>)</span><br><span class="line">        <span class="comment">// console.log(res.data.token)</span></span><br><span class="line">        <span class="built_in">window</span>.sessionStorage.setItem(<span class="string">&#x27;token&#x27;</span>, res.data.token)</span><br><span class="line">        <span class="keyword">await</span> <span class="built_in">this</span>.$router.push(<span class="string">&#x27;/home&#x27;</span>)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>开发日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开发日志 2021/6/17</title>
+    <url>/2021/06/17/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-17/</url>
+    <content><![CDATA[<h1 id="2021-6-17"><a href="#2021-6-17" class="headerlink" title="# 2021/6/17"></a># 2021/6/17</h1><ul>
+<li>首页界面整体布局完成</li>
+<li>首页展示内容待确定</li>
+<li>引入动画库<code>vue-scroll-reveal: ^1.0.11</code></li>
+<li>添加渐入动画效果</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/17/g8fDabjwq56U4PA.png" alt="1"></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;div id=&quot;chart_line&quot; style=&quot;width: 700px;height: 500px;&quot;&gt;&lt;/div&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wel_header&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wel_title&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>高考<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h5</span>&gt;</span>志愿填报系统<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wel_icon&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card_main&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">class</span>=<span class="string">&quot;card_dashboard&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;chart_line&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width: 395px;height: 245px;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">class</span>=<span class="string">&quot;card_dashboard&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">class</span>=<span class="string">&quot;card_dashboard&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span> <span class="attr">class</span>=<span class="string">&quot;card_dashboard&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card_popularInstitutions&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-card</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>热门院校<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">el-card</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> echarts <span class="keyword">from</span> <span class="string">&#x27;echarts&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&#x27;Welcome&#x27;</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// value: new Date()</span></span><br><span class="line">      option: &#123;</span><br><span class="line">        title: &#123;</span><br><span class="line">          text: <span class="string">&#x27;高考录取率&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        xAxis: &#123;</span><br><span class="line">          type: <span class="string">&#x27;category&#x27;</span>,</span><br><span class="line">          data: [<span class="string">&#x27;2012&#x27;</span>, <span class="string">&#x27;2013&#x27;</span>, <span class="string">&#x27;2014&#x27;</span>, <span class="string">&#x27;2015&#x27;</span>, <span class="string">&#x27;2016&#x27;</span>, <span class="string">&#x27;2017&#x27;</span>, <span class="string">&#x27;2018&#x27;</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">        yAxis: &#123;</span><br><span class="line">          type: <span class="string">&#x27;value&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        series: [&#123;</span><br><span class="line">          data: [<span class="number">820</span>, <span class="number">932</span>, <span class="number">901</span>, <span class="number">934</span>, <span class="number">1290</span>, <span class="number">1330</span>, <span class="number">1320</span>],</span><br><span class="line">          type: <span class="string">&#x27;line&#x27;</span>,</span><br><span class="line">          smooth: <span class="literal">true</span></span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="comment">// eslint-disable-next-line camelcase</span></span><br><span class="line">    <span class="keyword">const</span> chart_line = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">&#x27;chart_line&#x27;</span>))</span><br><span class="line">    <span class="keyword">const</span> option = <span class="built_in">this</span>.option</span><br><span class="line">    option &amp;&amp; chart_line.setOption(option)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style scoped lang=&quot;less&quot;&gt;</span><br><span class="line"><span class="selector-class">.wel_header</span> &#123;</span><br><span class="line">  <span class="selector-class">.wel_title</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="selector-tag">h1</span> &#123;</span><br><span class="line">      <span class="attribute">font-weight</span>: <span class="number">500</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#7189ba</span>;</span><br><span class="line">      <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">h5</span> &#123;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#435f98</span>;</span><br><span class="line">      <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.card_main</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: row;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">45px</span>;</span><br><span class="line">  <span class="selector-class">.card_dashboard</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">395px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">245px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.card_popularInstitutions</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="selector-class">.el-card</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="selector-tag">h1</span> &#123;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">40px</span>;</span><br><span class="line">      <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#3e58c6</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="待解决问题"><a href="#待解决问题" class="headerlink" title="待解决问题"></a><strong>待解决问题</strong></h2><ul>
+<li>首页展示的卡片太多，能否制作一个可复用组件展示内容，但是每个卡片内容不同，传入的数据难以处理，正在寻找解决方案</li>
 </ul>
 ]]></content>
       <tags>
-        <tag>HTML5</tag>
+        <tag>开发日志</tag>
       </tags>
   </entry>
   <entry>
@@ -942,6 +970,55 @@
 ]]></content>
       <tags>
         <tag>CSS3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>语义化标签</title>
+    <url>/2021/04/10/%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE/</url>
+    <content><![CDATA[<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h2 id="语义化标签"><a href="#语义化标签" class="headerlink" title="语义化标签"></a>语义化标签</h2><h3 id="HTML5新增的语义化标签有"><a href="#HTML5新增的语义化标签有" class="headerlink" title="HTML5新增的语义化标签有"></a>HTML5新增的语义化标签有</h3><ul>
+<li><code>&lt;article&gt;</code>,<code>&lt;section&gt;</code>,<code>&lt;aside&gt;</code>,<code>&lt;header&gt;</code>,<code>&lt;footer&gt;</code>,<code>&lt;time&gt;</code>等<br><img src="https://img-blog.csdn.net/20180626164405788?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4MTI4MTc5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="区域"><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3></li>
+<li>为了在没用CSS的情况下，页面也能更好的呈现出内容结构，代码结构</li>
+<li>比div标签有更加丰富的含义，方便开发和维护</li>
+<li>方便搜索引擎识别页面结构，有利于SEO</li>
+<li>方便其他设备解析</li>
+<li>有利于合作，遵守W3C标准<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3></li>
+<li>尽可能少使用无语义的标签如div和span</li>
+<li>在语义不明显时，既可以使用div或者p时，尽量用p，因为p在默认情况下有上下间距，对兼容特殊终端有利</li>
+<li>不要使用纯样式标签，如p,font,u等，改用CSS样式</li>
+<li>需要强调的文本，可以包含在strong或者em标签中</li>
+<li>使用表格时，标题要用caption，表头用thead，主体部分用tbody包围，尾部用tfoot包围。表头和一般单元格要区分开，表头用th，单元格用td</li>
+<li>表单域要用fieldset标签包起来，并用legend标签说明表单的用途</li>
+<li>每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性<h2 id="header与hgroup"><a href="#header与hgroup" class="headerlink" title="header与hgroup"></a><code>header</code>与<code>hgroup</code></h2></li>
+<li>放在页面或布局的顶部，一般放置导航栏或标题，如：  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>**信息科技有限公司<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>一个文档中可以包含一对或者一对以上的<code>&lt;header&gt;</code>标签。</li>
+<li>标签的位置是次要的，不一定非要显示在页面的上方，<br>我们可以为任何需要的区块标签添加<code>&lt;header&gt;</code>元素，<br>例如下面将要讲解的<code>&lt;article&gt;</code>、<code>&lt;section&gt;</code>等标签。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hgroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>这是一篇介绍HTML 5语义化标签和更简洁的结构<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>HTML 5<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hgroup</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>如果有多个连续的h1~h6标签则用hgroup标签</li>
+<li>如果有连续多个标题和其他文章数据，h1-h6标签就用hgroup包住，<br>和其他文章元数据一起放入header标签<h2 id="nav标签"><a href="#nav标签" class="headerlink" title="nav标签"></a><code>nav</code>标签</h2></li>
+<li>表示页面的导航，可以在<code>header</code>中使用，还可以显示在侧边栏中，一个页面之中有多个<code>nav</code>标签</li>
+<li>为了方便搜索引擎解析，最好将多个主要的链接放在<code>nav</code>中<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">h1</span>&gt;</span>**信息科技有限公司<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;example.html&quot;</span>&gt;</span>客户案例<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;service_one.html&quot;</span>&gt;</span>技术服务<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span>          </span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;aboutus_one.html&quot;</span>&gt;</span>关于我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;connection.html&quot;</span>&gt;</span>联系我们<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="aside标签"><a href="#aside标签" class="headerlink" title="aside标签"></a><code>aside</code>标签</h2></li>
+<li>所包含的内容不是页面的主要内容、具有独立性，是对页面的补充。</li>
+<li><code>&lt;aside&gt;</code>一般使用在页面、文章的侧边栏、广告、友情链接等区域。<h2 id="footer标签"><a href="#footer标签" class="headerlink" title="footer标签"></a><code>footer</code>标签</h2></li>
+<li>一般被放置在页面或者页面中某个区块的底部，包含版权信息、联系方式等信息。</li>
+<li>一个页面也可以有多个footer<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">small</span>&gt;</span></span><br><span class="line">        版权所有 © 2016-2017 **信息科技有限公司</span><br><span class="line">    <span class="tag">&lt;/<span class="name">small</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="article标签"><a href="#article标签" class="headerlink" title="article标签"></a><code>article</code>标签</h2></li>
+<li><code>&lt;article&gt;</code>元素应该使用在相对比较独立、完整的的内容区块，</li>
+<li>所以我们可以在一篇博客、一个论坛帖子、一篇新闻报道或者一个用户评论中使用<code>&lt;article&gt;</code>元素。</li>
+<li><code>article</code>可以互相嵌套。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">h1</span>&gt;</span>HTML5学习之语义化标签<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">p</span>&gt;</span>....正文.....<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">footer</span>&gt;</span>版权所有*伪版必究<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="section标签"><a href="#section标签" class="headerlink" title="section标签"></a>section标签</h2></li>
+<li>一组或一节内容<h3 id="lt-div-gt-lt-sction-gt-和article标签的比较"><a href="#lt-div-gt-lt-sction-gt-和article标签的比较" class="headerlink" title="&lt;div&gt;,&lt;sction&gt;和article标签的比较"></a><code>&lt;div&gt;</code>,<code>&lt;sction&gt;</code>和<code>article</code>标签的比较</h3></li>
+<li>div:应用广泛，一个区域</li>
+<li>section:包含的内容是一个明确的主题，通常有标题区域</li>
+<li>article:如果我们的页面中需要一个单独的模块来实现一个单独的功能，就用<code>&lt;article&gt;</code>，<br>其他的时候都用<code>&lt;section&gt;</code><h2 id="time标签"><a href="#time标签" class="headerlink" title="time标签"></a><code>time</code>标签</h2></li>
+<li>可以带格式的时间标签<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2021-4-17&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="mark标签"><a href="#mark标签" class="headerlink" title="mark标签"></a><code>mark</code>标签</h2></li>
+<li>高亮显示<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mark</span>&gt;</span>这是一个mark标签<span class="tag">&lt;/<span class="name">mark</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="address标签"><a href="#address标签" class="headerlink" title="address标签"></a><code>address</code>标签</h2></li>
+<li>address代表区块容器，必须是作为联系信息出现，邮编地址、邮件地址等等,一般出现在footer。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>HTML5</tag>
       </tags>
   </entry>
   <entry>
@@ -1182,39 +1259,6 @@
 ]]></content>
       <tags>
         <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>#开发日志 2021/5/16</title>
-    <url>/2021/06/16/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-5-16/</url>
-    <content><![CDATA[<h1 id="开发日志"><a href="#开发日志" class="headerlink" title="# 开发日志"></a># 开发日志</h1><h2 id="2021-5-16"><a href="#2021-5-16" class="headerlink" title="# 2021/5/16"></a># 2021/5/16</h2><ul>
-<li>实现了登录界面的界面绘制</li>
-<li>实现了用户名和密码的验证</li>
-<li>实现了路由守卫控制跳转验证</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login_container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login_box&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &amp;lt;!&amp;ndash;头像区域&amp;ndash;&amp;gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;div class=&quot;avatar_box&quot;&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--          &lt;img src=&quot;../assets/images/avatar.svg&quot; alt=&quot;&quot;&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;/div&gt;--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login_text&quot;</span>&gt;</span></span><br><span class="line">          欢迎登录</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--表单区域--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-form</span> <span class="attr">:model</span>=<span class="string">&quot;from&quot;</span> <span class="attr">:rules</span>=<span class="string">&quot;loginFormRules&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;loginFormRef&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form_login&quot;</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--账号--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">prop</span>=<span class="string">&quot;username&quot;</span> <span class="attr">style</span>=<span class="string">&quot;margin-bottom: 50px&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont icon-username&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;from.username&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入账号&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--密码--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">prop</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont icon-password&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;from.password&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--登录--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">class</span>=<span class="string">&quot;btns&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">round</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;login&quot;</span> <span class="attr">class</span>=<span class="string">&quot;login_button&quot;</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-form</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style scoped=&quot;scoped&quot; lang=&quot;less&quot;&gt;</span><br><span class="line"><span class="selector-class">.login_container</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;~@/assets/images/bgimg.jpg&#x27;</span>);</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">  <span class="attribute">background-size</span>: cover;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">align-content</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.login</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&quot;~@/assets/images/login_box.png&quot;</span>);</span><br><span class="line">  <span class="attribute">background-size</span>: cover;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">1314px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">660px</span>;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-around;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.login_text</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">55px</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#3e58c6</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">330px</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">70px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">85px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">4px</span> solid <span class="number">#6386ff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.login_pic</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">15px</span>, <span class="number">0px</span>);</span><br><span class="line">  <span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">600px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.login_box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">450px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">450px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">65%</span>, <span class="number">0%</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btns</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: flex-end;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="selector-class">.login_button</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#3e58c6</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">65px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">230px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">115px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">25px</span>;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">border</span>: unset;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.form_login</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">10px</span> <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  /deep/ <span class="selector-class">.el-form-item__content</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="selector-class">.icon-username</span>, <span class="selector-class">.icon-password</span> &#123;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">40px</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#3e58c6</span>;</span><br><span class="line">      <span class="attribute">margin-right</span>: <span class="number">15px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.el-input</span> &#123;</span><br><span class="line">    /deep/ <span class="selector-class">.el-input__inner</span> &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: <span class="number">#eeeff3</span>;</span><br><span class="line">      <span class="attribute">width</span>: <span class="number">390px</span>;</span><br><span class="line">      <span class="attribute">height</span>: <span class="number">60px</span>;</span><br><span class="line">      <span class="attribute">border-radius</span>: <span class="number">30px</span>;</span><br><span class="line">      <span class="attribute">border</span>: unset;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&#x27;Login&#x27;</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="keyword">from</span>: &#123;</span><br><span class="line">        username: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">        password: <span class="string">&#x27;&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      loginFormRules: &#123;</span><br><span class="line">        username: [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录名&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">min</span>: <span class="number">3</span>, <span class="attr">max</span>: <span class="number">10</span>, <span class="attr">message</span>: <span class="string">&#x27;长度在 3 到 5 个字符&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ],</span><br><span class="line">        password: [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录密码&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">min</span>: <span class="number">3</span>, <span class="attr">max</span>: <span class="number">18</span>, <span class="attr">message</span>: <span class="string">&#x27;长度在 3 到 6 个字符&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// resetLoginForm () &#123;</span></span><br><span class="line">    <span class="comment">//   // console.log(this);</span></span><br><span class="line">    <span class="comment">//   this.$refs.loginFormRef.resetFields()</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    login () &#123;</span><br><span class="line">      <span class="built_in">this</span>.$refs.loginFormRef.validate(<span class="keyword">async</span> valid =&gt; &#123;</span><br><span class="line">        <span class="comment">// console.log(valid)</span></span><br><span class="line">        <span class="keyword">if</span> (!valid) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> <span class="built_in">this</span>.$http.post(<span class="string">&#x27;login&#x27;</span>, <span class="built_in">this</span>.from)</span><br><span class="line">        <span class="built_in">console</span>.log(res)</span><br><span class="line">        <span class="keyword">if</span> (res.meta.status !== <span class="number">200</span>) <span class="keyword">return</span> <span class="built_in">this</span>.$message.error(<span class="string">&#x27;账户或密码错误，登录失败&#x27;</span>)</span><br><span class="line">        <span class="built_in">this</span>.$message.success(<span class="string">&#x27;登录成功&#x27;</span>)</span><br><span class="line">        <span class="comment">// console.log(res.data.token)</span></span><br><span class="line">        <span class="built_in">window</span>.sessionStorage.setItem(<span class="string">&#x27;token&#x27;</span>, res.data.token)</span><br><span class="line">        <span class="keyword">await</span> <span class="built_in">this</span>.$router.push(<span class="string">&#x27;/home&#x27;</span>)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>开发日志</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>#开发日志 2021/5/15</title>
-    <url>/2021/06/15/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-5-15/</url>
-    <content><![CDATA[<h1 id="开发日志"><a href="#开发日志" class="headerlink" title="# 开发日志"></a># 开发日志</h1><h2 id="2021-5-15"><a href="#2021-5-15" class="headerlink" title="# 2021/5/15"></a># 2021/5/15</h2><ul>
-<li>设计了登录界面，首页界面，专业查询界面和用户信息界面</li>
-</ul>
-<p><img src="https://i.loli.net/2021/06/16/PmNnsju8dQFrG1z.jpg" alt="登录界面设计稿（初稿）"></p>
-<p><img src="https://i.loli.net/2021/06/16/S58PYAi7Oja3VkL.jpg" alt="首页界面设计稿（初稿）"></p>
-<p><img src="https://i.loli.net/2021/06/16/Xl8RWDNc1K937Oh.jpg" alt="专业选择界面设计稿（初稿）"></p>
-<p><img src="https://i.loli.net/2021/06/16/lmJ7AfOiFvoSPpt.jpg" alt="用户信息界面设计稿（初稿）"></p>
-]]></content>
-      <tags>
-        <tag>开发日志</tag>
       </tags>
   </entry>
 </search>
