@@ -861,9 +861,9 @@
       </tags>
   </entry>
   <entry>
-    <title>#开发日志 2021/6/15</title>
+    <title>开发日志 2021/6/15</title>
     <url>/2021/06/15/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-15/</url>
-    <content><![CDATA[<h1 id="开发日志"><a href="#开发日志" class="headerlink" title="# 开发日志"></a># 开发日志</h1><h2 id="2021-5-15"><a href="#2021-5-15" class="headerlink" title="# 2021/5/15"></a># 2021/5/15</h2><ul>
+    <content><![CDATA[<h2 id="2021-5-15"><a href="#2021-5-15" class="headerlink" title="# 2021/5/15"></a># 2021/5/15</h2><ul>
 <li>设计了登录界面，首页界面，专业查询界面和用户信息界面</li>
 </ul>
 <p><img src="https://i.loli.net/2021/06/16/PmNnsju8dQFrG1z.jpg" alt="登录界面设计稿（初稿）"></p>
@@ -876,9 +876,9 @@
       </tags>
   </entry>
   <entry>
-    <title>#开发日志 2021/6/16</title>
+    <title>开发日志 2021/6/16</title>
     <url>/2021/06/16/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-16/</url>
-    <content><![CDATA[<h1 id="开发日志"><a href="#开发日志" class="headerlink" title="# 开发日志"></a># 开发日志</h1><h2 id="2021-5-16"><a href="#2021-5-16" class="headerlink" title="# 2021/5/16"></a># 2021/5/16</h2><ul>
+    <content><![CDATA[<h2 id="2021-5-16"><a href="#2021-5-16" class="headerlink" title="# 2021/5/16"></a># 2021/5/16</h2><ul>
 <li>实现了登录界面的界面绘制</li>
 <li>实现了用户名和密码的验证</li>
 <li>实现了路由守卫控制跳转验证</li>
@@ -1259,6 +1259,41 @@
 ]]></content>
       <tags>
         <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开发日志 2021/6/18</title>
+    <url>/2021/06/18/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97-2021-6-18/</url>
+    <content><![CDATA[<h1 id="2021-6-18"><a href="#2021-6-18" class="headerlink" title="# 2021/6/18"></a># 2021/6/18</h1><h2 id="完成封装echart"><a href="#完成封装echart" class="headerlink" title="完成封装echart"></a>完成封装echart</h2><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ul>
+<li>封装完成后echart报错，发现是版本过高导致，降低版本至<code>echarts@4.8.0</code></li>
+<li>重新安装后需npm重新编译echart<code>npm rebuild echarts</code></li>
+</ul>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><ul>
+<li><img src="https://i.loli.net/2021/06/18/Di4GsPtZHMAye6Y.png" alt="image-20210618100658563"></li>
+</ul>
+<h2 id="封装方法"><a href="#封装方法" class="headerlink" title="封装方法"></a>封装方法</h2><ol>
+<li>封装的Pie为可复用组件，通过props从父组件传入数据和配置项</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div ref&#x3D;&quot;myEchart&quot; :style&#x3D;&quot;&#123; height: height, width: width &#125;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import echarts from &#39;echarts&#39;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;echarts&#39;,</span><br><span class="line">  data () &#123; return &#123;&#125; &#125;,</span><br><span class="line">  props: &#123; height: &#123; type: String, default: &#39;80vh&#39; &#125;, width: &#123; type: String, default: &#39;100%&#39; &#125;, options: &#123; type: Object, default: () &#x3D;&gt; &#123;&#125; &#125; &#125;,</span><br><span class="line">  computed: &#123; myOptions: function () &#123; return this.options || &#123;&#125; &#125; &#125;,</span><br><span class="line">  mounted () &#123; this.drawLine() &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    drawLine () &#123;</span><br><span class="line">      const myChart &#x3D; echarts.init(this.$refs.myEchart)</span><br><span class="line">      myChart.setOption(this.myOptions) &#x2F;&#x2F; 绘制图表</span><br><span class="line">      console.log(myChart)</span><br><span class="line">      window.onresize &#x3D; () &#x3D;&gt; myChart.resize()</span><br><span class="line">      &#x2F;&#x2F;   window.addEventListener(&quot;resize&quot;, () &#x3D;&gt; myChart.resize());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>父组件存放数据，具体的配置项在同级目录下的<code>Pie.js</code>里面</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;v-echarts :options&#x3D;&quot;options&quot;&gt;&lt;&#x2F;v-echarts&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import vEcharts from &#39;..&#x2F;chart&#x2F;Pie&#39;</span><br><span class="line">import echartSettings from &#39;.&#x2F;pie.js&#39;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;&#39;,</span><br><span class="line">  components: &#123; vEcharts &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      options: echartSettings</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getData () &#123;</span><br><span class="line">      new Promise(resolve &#x3D;&gt; &#123;</span><br><span class="line">        const obj &#x3D; [</span><br><span class="line">          &#123;</span><br><span class="line">            value: 335,</span><br><span class="line">            name: &#39;直接访问&#39;</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            value: 310,</span><br><span class="line">            name: &#39;邮件营销&#39;</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            value: 234,</span><br><span class="line">            name: &#39;联盟广告&#39;</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            value: 135,</span><br><span class="line">            name: &#39;视频广告&#39;</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            value: 1548,</span><br><span class="line">            name: &#39;搜索引擎&#39;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">        resolve(obj)</span><br><span class="line">      &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">        const arr &#x3D; []</span><br><span class="line">        res.forEach(item &#x3D;&gt; arr.push(item.name))</span><br><span class="line">        echartSettings.legend.data &#x3D; arr</span><br><span class="line">        echartSettings.series[0].data &#x3D; res</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    this.getData()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Pie的配置</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  title: &#123;</span><br><span class="line">    text: <span class="string">&#x27;某站点用户访问来源&#x27;</span>,</span><br><span class="line">    subtext: <span class="string">&#x27;纯属虚构&#x27;</span>,</span><br><span class="line">    left: <span class="string">&#x27;center&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  tooltip: &#123;</span><br><span class="line">    trigger: <span class="string">&#x27;item&#x27;</span>,</span><br><span class="line">    formatter: <span class="string">&#x27;&#123;a&#125; &lt;br/&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  legend: &#123;</span><br><span class="line">    orient: <span class="string">&#x27;vertical&#x27;</span>,</span><br><span class="line">    left: <span class="string">&#x27;left&#x27;</span>,</span><br><span class="line">    data: []</span><br><span class="line">  &#125;,</span><br><span class="line">  series: [</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">&#x27;访问来源&#x27;</span>,</span><br><span class="line">      type: <span class="string">&#x27;pie&#x27;</span>,</span><br><span class="line">      radius: <span class="string">&#x27;55%&#x27;</span>,</span><br><span class="line">      center: [<span class="string">&#x27;50%&#x27;</span>, <span class="string">&#x27;60%&#x27;</span>],</span><br><span class="line">      data: [],</span><br><span class="line">      emphasis: &#123;</span><br><span class="line">        itemStyle: &#123;</span><br><span class="line">          shadowBlur: <span class="number">10</span>,</span><br><span class="line">          shadowOffsetX: <span class="number">0</span>,</span><br><span class="line">          shadowColor: <span class="string">&#x27;rgba(0, 0, 0, 0.5)&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="首页布局部分完成"><a href="#首页布局部分完成" class="headerlink" title="首页布局部分完成"></a>首页布局部分完成</h2><p><img src="https://i.loli.net/2021/06/18/V3gbNpSMmi8QWsn.png" alt="image-20210618203533152"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;card_main&quot; v-scroll-reveal.reset&gt;</span><br><span class="line">    &lt;el-card class&#x3D;&quot;card_dashboard&quot; shadow&#x3D;&quot;hover&quot;&gt;</span><br><span class="line">        &lt;line-chart :options&#x3D;&quot;lineOption&quot;&gt;&lt;&#x2F;line-chart&gt;</span><br><span class="line">    &lt;&#x2F;el-card&gt;</span><br><span class="line">    &lt;el-card class&#x3D;&quot;card_dashboard&quot; shadow&#x3D;&quot;hover&quot;&gt;</span><br><span class="line">        &lt;pie-chart :options&#x3D;&quot;pieOption&quot;&gt;&lt;&#x2F;pie-chart&gt;</span><br><span class="line">    &lt;&#x2F;el-card&gt;</span><br><span class="line">    &lt;el-card class&#x3D;&quot;card_dashboard&quot; shadow&#x3D;&quot;hover&quot;&gt;</span><br><span class="line">        &lt;bar-chart :options&#x3D;&quot;barOption&quot;&gt;&lt;&#x2F;bar-chart&gt;</span><br><span class="line">    &lt;&#x2F;el-card&gt;</span><br><span class="line">    &lt;el-card class&#x3D;&quot;card_dashboard&quot; shadow&#x3D;&quot;hover&quot;&gt;</span><br><span class="line">        &lt;gauge-chart :options&#x3D;&quot;gaugeOption&quot;&gt;&lt;&#x2F;gauge-chart&gt;</span><br><span class="line">    &lt;&#x2F;el-card&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">import lineChart from &#39;.&#x2F;chart&#x2F;Line.vue&#39;</span><br><span class="line">import pieChart from &#39;.&#x2F;chart&#x2F;Pie&#39;</span><br><span class="line">import barChart from &#39;.&#x2F;chart&#x2F;Bar&#39;</span><br><span class="line">import gaugeChart from &#39;.&#x2F;chart&#x2F;Gauge&#39;</span><br><span class="line">import lineChartSettings from &#39;.&#x2F;chart&#x2F;lineOption.js&#39;</span><br><span class="line">import pieChartSettings from &#39;.&#x2F;chart&#x2F;pieOption.js&#39;</span><br><span class="line">import barChartSettings from &#39;.&#x2F;chart&#x2F;barOption&#39;</span><br><span class="line">import gaugeChatrSettings from &#39;.&#x2F;chart&#x2F;gaugeOption&#39;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;Welcome&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      lineOption: lineChartSettings,</span><br><span class="line">      pieOption: pieChartSettings,</span><br><span class="line">      barOption: barChartSettings,</span><br><span class="line">      gaugeOption: gaugeChatrSettings</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123; lineChart, pieChart, barChart, gaugeChart &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>开发日志</tag>
       </tags>
   </entry>
 </search>
